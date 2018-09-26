@@ -16,17 +16,17 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         /// was specified unidirection Scrolling, this direction of scrollView is vertical
         $0.isDirectionalLockEnabled = true
         $0.bounces = false
-        $0.backgroundColor = .red
+        $0.backgroundColor = .white
         return $0
     }(UIScrollView(frame: CGRect.zero))
     
     lazy public private(set) var verticalCanvasView: UIView = {
-        $0.backgroundColor = .blue
+        $0.backgroundColor = .white
         return $0
     }(UIView(frame: CGRect.zero))
     
     public var headerView: UIView = {
-        $0.backgroundColor = .purple
+        $0.backgroundColor = .white
         return $0
     }(UIView(frame: CGRect.zero))
     
@@ -34,7 +34,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
     
     public var contentsScrollView: UIScrollView = {
         $0.bounces = false
-        $0.backgroundColor = UIColor.brown
+        $0.backgroundColor = .white
         $0.isDirectionalLockEnabled = true
         $0.showsVerticalScrollIndicator = false
         $0.isPagingEnabled = true
@@ -47,7 +47,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             width: ui.contentsScrollViewContentSize.width,
             height: ui.contentsScrollViewContentSize.height)
         $0.frame = rect
-        $0.backgroundColor = UIColor.magenta
+        $0.backgroundColor = .white
         return $0
     }(UIView(frame: CGRect.zero))
     
@@ -96,7 +96,6 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
     
     
     override func setupUI() {
-        
         backgroundColor = .white
         /*
          | View
