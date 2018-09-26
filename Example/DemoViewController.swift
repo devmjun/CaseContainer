@@ -7,8 +7,6 @@
 //
 
 import UIKit
-
-import UIKit
 import CaseContainer
 
 class DemoViewController: CaseContainerViewController {
