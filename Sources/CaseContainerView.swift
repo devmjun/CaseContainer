@@ -99,15 +99,15 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         backgroundColor = .white
         /*
          | View
-         | -- ScrollView
+         | -- containerScrollView
          | ---- verticalCanvasView
          | ------ headerView
          | ------ tabCollectionView
-         | ------ contentsView
+         | ------ contentsScrollView
          | -------- horizonCanvasView
-         | ---------- vc.view
-         | ---------- vc.view1
-         | ----------- .....
+         | ---------- vc.children.view
+         | ---------- vc.children.view1
+         | ----------- ...
          */
         addSubviews([containerScrollView])
         containerScrollView.addSubview(verticalCanvasView)
@@ -115,7 +115,6 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         verticalCanvasView.addSubviews([headerView, tabScrollView, contentsScrollView])
         
         let _bottomHeight: CGFloat = vc.tabBarController == nil ? 0 : vc.tabBarController!.tabBar.frame.height
-        
         
         containerScrollView
             .topAnchor(to: layoutMarginsGuide.topAnchor)
@@ -169,7 +168,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         tabScrollView.delegateBy(vc)
         
         guard let firstTitle = vc.viewContorllers.first?.title else {
-            fatalError("You must add viewControllers`s title when it is initialized")
+            fatalError("You must be to add viewControllers`s title when it is initialized")
         }
         
         tabScrollView.setupIndicator(
