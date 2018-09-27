@@ -12,7 +12,6 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
     lazy open private(set) var v = CaseContainerView(controllBy: self)
     weak open var delegate: CaseContainerDelegate?
     
-    // 유저에게 제공되기 위한 녀석들.. 리테인 싸이클 조심해야겠음
     open unowned var headerView: UIView { return v.headerView }
     open unowned var tabScrollView: TabScrollView { return v.tabScrollView }
     open unowned var contentsScrollView: UIScrollView { return v.contentsScrollView }
