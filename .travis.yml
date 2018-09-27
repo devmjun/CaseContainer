@@ -1,0 +1,5 @@
+language: objective-c  
+osx_image: xcode10.0
+xcode_project: CaseContainer.xcodeproj #3
+xcode_scheme: Example #4
+xcode_sdk: iphonesimulator12.0 #5
