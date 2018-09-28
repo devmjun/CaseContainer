@@ -4,7 +4,7 @@
 
 CaseContainer is *Container View Controller*
 
-`place that is added example gif or demo gif`
+`need to add example gif, example code, codecov and, consider to put Swift package `
 
 
 
