@@ -12,10 +12,10 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
     lazy open private(set) var v = CaseContainerView(controllBy: self)
     weak open var delegate: CaseContainerDelegate?
     
-    open unowned var headerView: UIView { return v.headerView }
-    open unowned var tabScrollView: TabScrollView { return v.tabScrollView }
-    open unowned var contentsScrollView: UIScrollView { return v.contentsScrollView }
-    open unowned var containerScrollView: UIScrollView { return v.containerScrollView }
+    open weak var headerView: UIView! { return v.headerView }
+    open weak var tabScrollView: TabScrollView! { return v.tabScrollView }
+    open weak var contentsScrollView: UIScrollView! { return v.contentsScrollView }
+    open weak var containerScrollView: UIScrollView! { return v.containerScrollView }
     
     open override func loadView() {
         view = v
@@ -104,7 +104,6 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
      this mothod delete All of the current ChildViewControllers with excepting of ChildViewController at `index`
      */
     open func removeWithout(_ index: Int?) {
-        print(children)
         children
             .forEach { [weak self] (childVC: UIViewController) in
                 guard let strongSelf = self else { return }
@@ -259,7 +258,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             let currentIndex = Int(scrollViewStatus.currentIndex)
             let contentOffsetX = scrollView.contentOffset.x
             
-            // 2s
+            // 2
             scrollViewStatus.currentIndex = floor( (contentOffsetX - contentsWidth / 2) / contentsWidth ) + 1
             v.tabScrollView.indicator.frame.origin.x = v.tabScrollView.buttonsRect[currentIndex].origin.x
             v.tabScrollView.indicator.frame.size.width = v.tabScrollView.buttonsRect[currentIndex].width
@@ -285,7 +284,6 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             index: Int(scrollViewStatus.currentIndex),
             scrollViewDidEndDecelerating: scrollView)
     }
-    
 }
 
 
