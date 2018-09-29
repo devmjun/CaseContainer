@@ -46,7 +46,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
                 self.v.tabScrollView.indicator.frame.origin.x = buttonRect.minX
                 self.v.tabScrollView.indicator.frame.size.width = buttonRect.width
                 self.v.contentsScrollView.setContentOffset(CGPoint(x: contentsWidth*index, y: 0), animated: false)
-                self.v.tabScrollView.contentOffset.x = self.v.tabScrollView.buttonsRect[index].minX / 2
+                self.v.tabScrollView.contentOffset.x = self.tabScrollView.status == .normal ? 0 :  self.v.tabScrollView.buttonsRect[index].minX / 2
                 
             }
             scrollViewStatus.currentIndex = CGFloat(index)
@@ -63,7 +63,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
         }
     }
     
-    var isEndProcessing: Bool = false {
+    var preventingException: Bool = false {
         willSet {
             contentsScrollView.isUserInteractionEnabled = newValue
         }
@@ -178,7 +178,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         if scrollView === v.contentsScrollView && scrollView !== v.tabScrollView   {
             scrollViewStatus.startDraggingOffsetX = scrollView.contentOffset.x
             /// prevent TabScrollView's indicator from getting out of doing before updating - 1
-            isEndProcessing = false
+            preventingException = false
         }
         
         delegate?.caseContainer?(
@@ -277,7 +277,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         }
         
         /// prevent TabScrollView's indicator from getting out of doing before updating - 1
-        isEndProcessing = true
+        preventingException = true
         
         delegate?.caseContainer?(
             caseContainerViewController: self,

@@ -9,6 +9,13 @@
 import UIKit
 
 open class TabScrollView: UIScrollView {
+    public enum Status {
+        case normal
+        case largeThenScreen
+    }
+    
+    open private(set) var status: Status = .normal
+    
     open var _horizontalCanvas = UIView()
     var indicator: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +53,8 @@ open class TabScrollView: UIScrollView {
             let buttonsWholeWidth = buttonsWidth.reduce(0, +)
             let eachRatio = buttonsWidth.map { $0 / buttonsWholeWidth }
             buttonsWidth = eachRatio.map { $0 * UIScreen.mainWidth }
+        }else {
+            status = .largeThenScreen
         }
         
         for item in 0..<vc.viewContorllers.count {
@@ -54,7 +63,7 @@ open class TabScrollView: UIScrollView {
                 width: buttonsWidth[item], height: ui.tabScrollViewHeight)
             buttonsRect.append(rect)
         }
-//
+
         contentSize = CGSize(
             width: buttonsWidth.reduce(0, +),
             height: ui.tabScrollViewHeight)
@@ -135,7 +144,7 @@ open class TabScrollView: UIScrollView {
         let convertOriginX = originX - (destination - contentScrollViewOriginX) * ratio
         
         indicator.frame.origin.x = convertOriginX
-        contentOffset.x = convertOriginX / 2
+        contentOffset.x = status == .normal ? 0 :  convertOriginX / 2
         
         let prevButtonWidth = buttonsRect[index].width
         let currentButtonWidth = buttonsRect[index+1].width
@@ -174,7 +183,7 @@ open class TabScrollView: UIScrollView {
         let convertOriginX = (contentScrollViewOriginX - destination) * ratio + originX
         
         indicator.frame.origin.x = convertOriginX
-        contentOffset.x = convertOriginX / 2
+        contentOffset.x = status == .normal ? 0 : convertOriginX / 2
         
         // Synchronize indicator's width
         let nextButtonWidth = buttonsRect[index].width

@@ -18,6 +18,7 @@
 		040EFA1F215BCA670082E029 /* TestingFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EFA1E215BCA670082E029 /* TestingFrame.swift */; };
 		040EFA28215BCAA60082E029 /* TestingFrameWithTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EFA27215BCAA60082E029 /* TestingFrameWithTabBar.swift */; };
 		040EFA2A215BCAB10082E029 /* LifeCycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EFA29215BCAB10082E029 /* LifeCycleTests.swift */; };
+		04321DA7215F3B5100565864 /* NarmalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04321DA6215F3B5100565864 /* NarmalViewController.swift */; };
 		04DBEE11215A279C009750F2 /* CaseContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04DBEE03215A279C009750F2 /* CaseContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04DBEE1F215A2A2B009750F2 /* CaseContainerBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */; };
 		04DBEE21215A2A33009750F2 /* CaseContainerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */; };
@@ -81,6 +82,7 @@
 		040EFA20215BCA670082E029 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		040EFA27215BCAA60082E029 /* TestingFrameWithTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingFrameWithTabBar.swift; sourceTree = "<group>"; };
 		040EFA29215BCAB10082E029 /* LifeCycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCycleTests.swift; sourceTree = "<group>"; };
+		04321DA6215F3B5100565864 /* NarmalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NarmalViewController.swift; sourceTree = "<group>"; };
 		04DBEE00215A279C009750F2 /* CaseContainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaseContainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DBEE03215A279C009750F2 /* CaseContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaseContainer.h; sourceTree = "<group>"; };
 		04DBEE04215A279C009750F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				040EF9FE215BC6BC0082E029 /* AppDelegate.swift */,
 				040EFA00215BC6BC0082E029 /* DemoViewController.swift */,
 				040EFA0F215BC7680082E029 /* ChildTableViewController.swift */,
+				04321DA6215F3B5100565864 /* NarmalViewController.swift */,
 				040EFA02215BC6BC0082E029 /* Main.storyboard */,
 				040EFA05215BC6BD0082E029 /* Assets.xcassets */,
 				040EFA07215BC6BD0082E029 /* LaunchScreen.storyboard */,
@@ -383,6 +386,7 @@
 				040EFA01215BC6BC0082E029 /* DemoViewController.swift in Sources */,
 				040EF9FF215BC6BC0082E029 /* AppDelegate.swift in Sources */,
 				040EFA10215BC7680082E029 /* ChildTableViewController.swift in Sources */,
+				04321DA7215F3B5100565864 /* NarmalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
