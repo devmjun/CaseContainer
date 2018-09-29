@@ -36,9 +36,42 @@ open class TabScrollView: UIScrollView {
         backgroundColor = .white
     }
     
+    
     // 2
-    open func delegateBy(_ owner: UIScrollViewDelegate) {
-        delegate = owner
+    func setupBinding(
+        parent vc: CaseContainerViewController,
+        ui: CaseContainerView.UI) {
+        var buttonsWidth = vc.viewContorllers.map { return vc.inferIntrinsicCellWidth($0.title) }
+        if buttonsWidth.reduce(0, +) <= UIScreen.mainWidth {
+            let buttonsWholeWidth = buttonsWidth.reduce(0, +)
+            let eachRatio = buttonsWidth.map { $0 / buttonsWholeWidth }
+            buttonsWidth = eachRatio.map { $0 * UIScreen.mainWidth }
+        }
+        
+        for item in 0..<vc.viewContorllers.count {
+            let rect = CGRect(
+                x: buttonsWidth[..<item].reduce(0, +), y: 0,
+                width: buttonsWidth[item], height: ui.tabScrollViewHeight)
+            buttonsRect.append(rect)
+        }
+//
+        contentSize = CGSize(
+            width: buttonsWidth.reduce(0, +),
+            height: ui.tabScrollViewHeight)
+        
+        _horizontalCanvas
+            .topAnchor(to: topAnchor)
+            .bottomAnchor(to: bottomAnchor)
+            .leadingAnchor(to: leadingAnchor)
+            .trailingAnchor(to: trailingAnchor)
+            .dimensionAnchors(size: contentSize)
+            .activateAnchors()
+        
+        setupIndicator(
+            firstSize: CGSize(width: buttonsWidth[0],
+                              height: ui.tabScrollViewHeight))
+        
+        setupButtons(parent: vc)
     }
     
     // 3
@@ -51,33 +84,22 @@ open class TabScrollView: UIScrollView {
     }
     
     // 4
-    func setupBinding(viewController: CaseContainerViewController, height: CGFloat) {
-        let childVC = viewController.viewContorllers
-        let tabBarColor = viewController.appearence.tabColor
-        let indicatorColor = viewController.appearence.indicatorColor
-        let contentWidth = buttonsRect.reduce(0){ $0 + $1.width } /* add button's Width + button1's  width.. */
+    func setupButtons(parent vc: CaseContainerViewController) {
+        let tabBarColor = vc.appearence.tabColor
+        let indicatorColor = vc.appearence.indicatorColor
         
-        contentSize = CGSize(width: contentWidth, height: height)
-        
-        _horizontalCanvas
-            .topAnchor(to: topAnchor)
-            .bottomAnchor(to: bottomAnchor)
-            .leadingAnchor(to: leadingAnchor)
-            .trailingAnchor(to: trailingAnchor)
-            .dimensionAnchors(size: contentSize)
-            .activateAnchors()
-        
-        let title = childVC.compactMap { $0.title }
-        
+        let titles = vc.viewContorllers.compactMap { $0.title }
         for i in 0..<buttonsRect.count {
             let btn = TabButton(frame: buttonsRect[i])
-            btn.setTitle("\(title[i])", for: .normal)
+            btn.setTitle("\(titles[i])", for: .normal)
             btn.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
             btn.tag = i
             btn.normalColor = tabBarColor.normal
             btn.highLightedColor = tabBarColor.highLight
             btn.status = i == 0 ? .on : .off
-            btn.addTarget(viewController, action: #selector(viewController.tabButtonAction(_:)), for: .touchUpInside)
+            btn.addTarget(vc, action: #selector(vc.tabButtonAction(_:)), for: .touchUpInside)
+            btn.layer.borderColor = UIColor.black.cgColor
+            btn.layer.borderWidth = 0.5
             _horizontalCanvas.addSubview(btn)
             buttons.append(btn)
         }

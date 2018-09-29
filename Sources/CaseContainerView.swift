@@ -20,6 +20,9 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         return $0
     }(UIScrollView(frame: CGRect.zero))
     
+    /**
+     This property is containerScrollView's contentView
+     */
     lazy public private(set) var verticalCanvasView: UIView = {
         $0.backgroundColor = .white
         return $0
@@ -41,6 +44,9 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         return $0
     }(UIScrollView(frame: CGRect.zero))
     
+    /**
+     This propery is ContentsScrollView's Content View
+     */
     lazy public private(set) var horizonCanvasView: UIView = {
         let rect = CGRect(
             x: 0, y: 0,
@@ -51,7 +57,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         return $0
     }(UIView(frame: CGRect.zero))
     
-    struct _UI {
+    struct UI {
         var headerViewHeight: CGFloat
         var tabScrollViewHeight: CGFloat
         var contentsScrollViewFrameSize: CGSize
@@ -89,7 +95,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         }
     }
     
-    lazy var ui = _UI(
+    lazy var ui = UI(
         needs: vc.viewContorllers,
         headerHeight: vc.appearence.headerHeight,
         tabScrollHeaight: vc.appearence.tabScrollHegiht, viewController: vc)
@@ -153,43 +159,36 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             .activateAnchors()
         
         /// ViewControllers that are added on initilization add parent ViewController's childViewController
+        
+        guard vc.viewContorllers.count > 0 else {
+            fatalError("You must be to add container view controller's child view controller when it is initializaed")
+        }
+        
+        vc.viewContorllers.forEach {
+            guard $0.title != nil else {
+                fatalError("You must be to add viewControllers`s title when it is initialized")
+            }
+        }
+        
         setupChildViewController(of: vc.viewContorllers)
         
     }
     
     override func setupBinding() {
-        
         containerScrollView.contentSize = ui.containerScrollViewContentSize
         contentsScrollView.contentSize = ui.contentsScrollViewContentSize
         
         containerScrollView.delegate = vc
         contentsScrollView.delegate = vc
+        tabScrollView.delegate = vc
         
-        tabScrollView.delegateBy(vc)
-        
-        guard let firstTitle = vc.viewContorllers.first?.title else {
-            fatalError("You must be to add viewControllers`s title when it is initialized")
-        }
-        
-        tabScrollView.setupIndicator(
-            firstSize: CGSize(width: vc.inferIntrinsicCellWidth(firstTitle),height: ui.tabScrollViewHeight))
-        var buttonsWidth = vc.viewContorllers.map { return vc.inferIntrinsicCellWidth($0.title) }
-        
-        for item in 0..<vc.viewContorllers.count {
-            let rect = CGRect(
-                x: buttonsWidth[..<item].reduce(0, +), y: 0,
-                width: buttonsWidth[item], height: ui.tabScrollViewHeight)
-            tabScrollView.buttonsRect.append(rect)
-        }
-        
-        tabScrollView.setupBinding(viewController: vc, height: ui.tabScrollViewHeight)
+        tabScrollView.setupBinding(parent: vc, ui: ui)
         
     }
     
-    func setupChildViewController(of childViewControllers: [UIViewController]?) {
-        guard let childViewControllers = childViewControllers,
-            let initialChildVC = childViewControllers.first else {
-                fatalError("Container View Controller didn't has both one or more ChildView Controller")
+    func setupChildViewController(of childViewControllers: [UIViewController]) {
+        guard let initialChildVC = childViewControllers.first else {
+            return
         }
         // 1. Add child Viewcontroller into ContainerViewControlelr
         vc.addChild(initialChildVC)
@@ -202,6 +201,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         
         initialChildVC.didMove(toParent: vc)
     }
+    
 }
 
 

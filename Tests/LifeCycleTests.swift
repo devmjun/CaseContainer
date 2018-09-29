@@ -21,26 +21,28 @@ class LifeCycleTests: XCTestCase {
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil 
+        super.tearDown()
     }
     
     func test_CallingDeinit() {
-        let mockDemoViewController = MockDemoViewController()
-        sut = mockDemoViewController
-        self.sut = nil
         let expectation = XCTestExpectation()
-        XCTWaiter.wait(for: [expectation], timeout: 1)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        sut = MockDemoViewController()
+        (sut as? MockDemoViewController)?.calledDeinit = {
             expectation.fulfill()
-            XCTAssertTrue(mockDemoViewController.isCalledDeinit)
         }
+        sut = nil
+        UIApplication.shared.keyWindow?.rootViewController = nil
+        
+        wait(for: [expectation], timeout: 2)
     }
 }
 
 extension LifeCycleTests {
     class MockDemoViewController: DemoViewController {
-        var isCalledDeinit: Bool = false
-        deinit {
-            isCalledDeinit = true
-        }
+        var calledDeinit: (() -> Void)?
+        deinit { calledDeinit?() }
     }
 }
+
+
