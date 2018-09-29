@@ -12,6 +12,7 @@ class LifeCycleTests: XCTestCase {
     
     var sut: DemoViewController!
     override func setUp() {
+        super.setUp()
         sut = DemoViewController()
         _ = sut.v
         sut.v.layoutIfNeeded()
@@ -21,7 +22,7 @@ class LifeCycleTests: XCTestCase {
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        sut = nil 
+        sut = nil
         super.tearDown()
     }
     

@@ -43,7 +43,6 @@ open class TabScrollView: UIScrollView {
         backgroundColor = .white
     }
     
-    
     // 2
     func setupBinding(
         parent vc: CaseContainerViewController,
@@ -116,6 +115,22 @@ open class TabScrollView: UIScrollView {
         indicator.backgroundColor = indicatorColor
     }
     
+    public func reload(_ index: Int) {
+        // indicator origin x
+        // indicator width
+        // tabScrollView contentOffset
+        
+        guard index < self.buttonsRect.count else { return }
+        let buttonRect = buttonsRect[index]
+        let limitingValue = contentSize.width - UIScreen.mainWidth
+        let convertOffsetX = (buttonRect.minX / 2 >= limitingValue) ? limitingValue : buttonRect.minX / 2
+        
+        indicator.frame.origin.x = buttonRect.minX
+        indicator.frame.size.width = buttonRect.width
+        contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
+        
+    }
+    
     public func scrollingSynchronization(
         prevIndex: Int?, nextIndex: Int?,
         progress: CGFloat, scrollView: UIScrollView) {
@@ -143,8 +158,11 @@ open class TabScrollView: UIScrollView {
         let destination = UIScreen.mainWidth * CGFloat(index + 1)
         let convertOriginX = originX - (destination - contentScrollViewOriginX) * ratio
         
+        let limitingValue = contentSize.width - UIScreen.mainWidth
+        let convertOffsetX = (convertOriginX / 2 >= limitingValue) ? limitingValue : convertOriginX / 2
+        
         indicator.frame.origin.x = convertOriginX
-        contentOffset.x = status == .normal ? 0 :  convertOriginX / 2
+        contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
         
         let prevButtonWidth = buttonsRect[index].width
         let currentButtonWidth = buttonsRect[index+1].width
@@ -182,8 +200,11 @@ open class TabScrollView: UIScrollView {
         let destination = UIScreen.mainWidth * CGFloat(index)
         let convertOriginX = (contentScrollViewOriginX - destination) * ratio + originX
         
+        let limitingValue = contentSize.width - UIScreen.mainWidth
+        let convertOffsetX = (convertOriginX/2 >= limitingValue) ? limitingValue : convertOriginX / 2
+        
         indicator.frame.origin.x = convertOriginX
-        contentOffset.x = status == .normal ? 0 : convertOriginX / 2
+        contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
         
         // Synchronize indicator's width
         let nextButtonWidth = buttonsRect[index].width

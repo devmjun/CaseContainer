@@ -41,14 +41,12 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
             let currentViewControllerIdnex = viewControllerIndex(currentVC),
             currentViewControllerIdnex != index {
             UIView.animate(withDuration: 0.25) {
-                let buttonRect = self.tabScrollView.buttonsRect[index]
                 let contentsWidth = Int(UIScreen.mainWidth)
-                self.v.tabScrollView.indicator.frame.origin.x = buttonRect.minX
-                self.v.tabScrollView.indicator.frame.size.width = buttonRect.width
-                self.v.contentsScrollView.setContentOffset(CGPoint(x: contentsWidth*index, y: 0), animated: false)
-                self.v.tabScrollView.contentOffset.x = self.tabScrollView.status == .normal ? 0 :  self.v.tabScrollView.buttonsRect[index].minX / 2
-                
+                self.v.tabScrollView.reload(index)
+                self.v.contentsScrollView.setContentOffset(
+                    CGPoint(x: contentsWidth * index, y: 0),animated: false)
             }
+            
             scrollViewStatus.currentIndex = CGFloat(index)
             buttonHighlight(index)
             buttonDehighlightWithout(index)
