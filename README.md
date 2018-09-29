@@ -6,7 +6,6 @@
 
 CaseContainer is *Container View Controller*
 
-`Need to add example gif, example code, codecov and, consider to put Swift package` 
 
 ## Requirements
 
