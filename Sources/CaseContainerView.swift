@@ -88,6 +88,10 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
                 width: UIScreen.mainWidth * numberOfChildVierControlelr,
                 height: contentsScrollViewFrameSize.height)
             
+//            contentsScrollViewContentSize = CGSize(
+//                width: UIScreen.mainWidth * numberOfChildVierControlelr,
+//                height: UIScreen.mainHeight - UIApplication.statusBarHeight)
+            
             containerScrollViewContentSize = CGSize(
                 width: UIScreen.mainWidth,
                 height: headerViewHeight + tabScrollViewHeight + contentsScrollViewFrameSize.height)
@@ -104,16 +108,16 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
     override func setupUI() {
         backgroundColor = .white
         /*
-         | View
-         | -- containerScrollView
-         | ---- verticalCanvasView
-         | ------ headerView
-         | ------ tabCollectionView
-         | ------ contentsScrollView
-         | -------- horizonCanvasView
-         | ---------- vc.children.view
-         | ---------- vc.children.view1
-         | ----------- ...
+         ⎮ View
+         ⎮ -- containerScrollView
+         ⎮ ---- verticalCanvasView
+         ⎮ ------ headerView
+         ⎮ ------ tabCollectionView
+         ⎮ ------ contentsScrollView
+         ⎮ -------- horizonCanvasView
+         ⎮ ---------- vc.children.view
+         ⎮ ---------- vc.children.view1
+         ⎮ ----------- ...
          */
         addSubviews([containerScrollView])
         containerScrollView.addSubview(verticalCanvasView)
@@ -197,7 +201,14 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         horizonCanvasView.addSubview(initialChildVC.view)
         
         // 3. determine child View Controller`s view frame
-        initialChildVC.view.frame = CGRect(x: 0, y: 0, width: ui.contentsScrollViewFrameSize.width, height: ui.contentsScrollViewContentSize.height)
+        if initialChildVC is ParallaxTableViewController {
+            initialChildVC.view.frame = CGRect(x: 0, y: 0, width: ui.contentsScrollViewFrameSize.width, height: ui.contentsScrollViewContentSize.height)
+        }else {
+            let vaildViewHeight = UIScreen.mainHeight - UIApplication.statusBarHeight
+            let scaleRatio = ui.contentsScrollViewContentSize.height / vaildViewHeight
+            initialChildVC.view.transform = CGAffineTransform(scaleX: 1.0, y: scaleRatio)
+            initialChildVC.view.frame.origin = CGPoint.zero
+        }
         
         initialChildVC.didMove(toParent: vc)
     }

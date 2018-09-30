@@ -83,14 +83,20 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
             if let childVC = viewContorllers.at(index) {
                 addChild(childVC)
                 v.horizonCanvasView.addSubview(childVC.view)
-                let indexWidth: CGFloat = v.ui.contentsScrollViewFrameSize.width
-                let rect = CGRect(
-                    x: indexWidth * CGFloat(index),
-                    y: 0,
-                    width: indexWidth,
-                    height: v.ui.contentsScrollViewContentSize.height)
                 
-                childVC.view.frame = rect
+                if childVC is ParallaxTableViewController {
+                    let indexWidth: CGFloat = v.ui.contentsScrollViewFrameSize.width
+                    let rect = CGRect(
+                        x: indexWidth * CGFloat(index), y: 0,
+                        width: indexWidth, height: v.ui.contentsScrollViewContentSize.height)
+                    childVC.view.frame = rect
+                }else {
+                    let vaildViewHeight = UIScreen.mainHeight - UIApplication.statusBarHeight
+                    let scaleRatio = v.ui.contentsScrollViewContentSize.height / vaildViewHeight
+                    childVC.view.transform = CGAffineTransform(scaleX: 1.0, y: scaleRatio)
+                    childVC.view.frame.origin = CGPoint(x: v.ui.contentsScrollViewFrameSize.width * CGFloat(index), y: 0)
+                }
+                
                 childVC.didMove(toParent: self)
                 childVC.beginAppearanceTransition(true, animated: true)
                 childVC.endAppearanceTransition()
@@ -258,8 +264,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             
             // 2
             scrollViewStatus.currentIndex = floor( (contentOffsetX - contentsWidth / 2) / contentsWidth ) + 1
-            v.tabScrollView.indicator.frame.origin.x = v.tabScrollView.buttonsRect[currentIndex].origin.x
-            v.tabScrollView.indicator.frame.size.width = v.tabScrollView.buttonsRect[currentIndex].width
+            v.tabScrollView.reload(currentIndex)
             
             // 3
             buttonHighlight(currentIndex)
