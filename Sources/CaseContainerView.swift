@@ -15,7 +15,13 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         $0.showsVerticalScrollIndicator = false
         /// was specified unidirection Scrolling, this direction of scrollView is vertical
         $0.isDirectionalLockEnabled = true
-        $0.bounces = false
+        $0.bounces = true
+        
+        /// height of scrollView's contentSize is adjusted in iPhoneX' seriess(iPhoneX, iPhone XS, iPhone XR...). I didn't want to this Behavior
+        if #available(iOS 11, *) {
+            $0.contentInsetAdjustmentBehavior = .never
+        }
+        
         $0.backgroundColor = .white
         return $0
     }(UIScrollView(frame: CGRect.zero))
@@ -187,7 +193,6 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         tabScrollView.delegate = vc
         
         tabScrollView.setupBinding(parent: vc, ui: ui)
-        
     }
     
     func setupChildViewController(of childViewControllers: [UIViewController]) {
