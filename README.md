@@ -36,6 +36,8 @@ add CaseContainer to your `Cartfile`:
 github "devminjun/CaseContainer" ~> 0.2.0
 ```
 
+And run `carthage update`.
+
 ## Usage
 
 
