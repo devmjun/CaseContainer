@@ -31,7 +31,6 @@ class TestingFrameWithTabBar: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         sut = nil
-        statusBarHeight = 0
         super.tearDown()
     }
     
