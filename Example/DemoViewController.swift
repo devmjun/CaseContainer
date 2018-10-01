@@ -22,13 +22,32 @@ class DemoViewController: CaseContainerViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    var imageView: UIImageView?
+    
+    override func loadView() {
+        super.loadView()
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         delegate = self
-        dismissButton.addTarget(self, action: #selector(dismissButtonAction(_:)), for: .touchUpInside)
+        
+        dismissButton.addTarget(
+            self,
+            action: #selector(dismissButtonAction(_:)),
+            for: .touchUpInside)
+        
         view.addSubview(dismissButton)
         dismissButton.bringSubviewToFront(containerScrollView)
+        
+        imageView = UIImageView(image: UIImage(named: "swiss.jpg"))
+        if let imageView = imageView {
+            headerView.addSubview(imageView)
+            imageView.frame = CGRect(x: 0, y: 0,
+                                     width: UIScreen.mainWidth, height: appearence.headerHeight)
+        }
     }
     
     required init() {
@@ -57,6 +76,7 @@ class DemoViewController: CaseContainerViewController {
             headerViewHegiht: 300, tabScrollViewHeight: 50,
             indicatorColor: .green,
             tabButtonColor: (normal: .gray, highLight: .black))
+        
     }
     
     
@@ -75,6 +95,7 @@ class DemoViewController: CaseContainerViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
     }
     
     deinit { print("Called \(#function) at \(self)") }
