@@ -13,21 +13,9 @@ import CaseContainer
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
-        
-        //        window?.rootViewController = CaseContainerViewController(vcs)
-        let tb = UITabBarController(nibName: nil, bundle: nil)
-        let vc1 = UINavigationController(rootViewController: DemoViewController())
-        let vc2 = UINavigationController(rootViewController: DemoViewController())
-        let vc3 = UINavigationController(rootViewController: DemoViewController())
-        tb.viewControllers = [vc1, vc2, vc3]
-        
-        
-        window?.rootViewController =  tb//DemoViewController()//tb //DemoViewController() //tb
+        window?.rootViewController =  StartViewController()
         window?.makeKeyAndVisible()
         return true
     }
@@ -39,4 +27,12 @@ extension UIScreen {
     static var mainSize: CGSize { return UIScreen.main.bounds.size }
 }
 
+extension UIColor {
+    static func generateRandomColor() -> UIColor {
+        let hue : CGFloat = CGFloat(arc4random() % 256) / 256
+        let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5
+        let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
+    }
+}
 
