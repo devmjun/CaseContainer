@@ -141,24 +141,11 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         contentsScrollView.addSubview(horizonCanvasView)
         verticalCanvasView.addSubviews([headerView, tabScrollView, contentsScrollView])
         
-        // 원래는 tabBar hegiht 83, 여기서는 49, home indicator 34..
-        // 힌트 얻음 po UIApplication.shared.keyWindow?.rootViewController!.view.value(forKey: "adjustedContentInset") as? UIEdgeInsets
-        var _bottomHeight: CGFloat = tabBarHeight//vc.tabBarController == nil ? 0 : vc.tabBarController!.tabBar.frame.height
-        
-        if #available(iOS 11, *) {
-            
-            
-
-        }else {
-            
-        }
-        
-        
         containerScrollView
             .topAnchor(to: layoutMarginsGuide.topAnchor)
             .leadingAnchor(to: leadingAnchor)
             .trailingAnchor(to: trailingAnchor)
-            .bottomAnchor(to: bottomAnchor, constant: -_bottomHeight)
+            .bottomAnchor(to: bottomAnchor, constant: -tabBarHeight)
             .activateAnchors()
         
         verticalCanvasView
