@@ -31,8 +31,8 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
+    
     
     /// didSelect TabButton
     @objc func tabButtonAction(_ sender: TabButton) {
@@ -153,6 +153,7 @@ extension CaseContainerViewController {
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         children.forEach { $0.endAppearanceTransition() }
+        
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
@@ -197,9 +198,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         let direction = scrollView.panGestureRecognizer.translation(in: scrollView.superview).x
         let offsetX = scrollView.contentOffset.x
         
-        if scrollView === v.contentsScrollView &&
-            direction > 0 || direction < 0 &&
-            scrollView !== v.tabScrollView { /* explicitly, Call the scrollview because it uses a nested scrollView */
+        if scrollView === v.contentsScrollView && direction > 0 || direction < 0 && scrollView !== v.tabScrollView { /* explicitly, Call the scrollview because it uses a nested scrollView */
             // Switch Index when more than 50% of the previous/next page is visible
             scrollViewStatus.currentIndex = floor( (offsetX - contentsWidth / 2) / contentsWidth ) + 1
             scrollViewStatus.originIndex = floor( (offsetX - contentsWidth) / contentsWidth ) + 1
@@ -240,6 +239,11 @@ extension CaseContainerViewController: UIScrollViewDelegate {
                     scrollViewStatus.startDraggingOffsetX = ceil(scrollView.contentOffset.x)
                 }
             }
+        }else if scrollView === containerScrollView {
+            let maxiumOffsetY = v.headerView.frame.height
+            let progress = max(containerScrollView.contentOffset.y / maxiumOffsetY, 1.0)
+            delegate?.caseContainer?(parallaxHeader: progress)
+            
         }
     }
     
