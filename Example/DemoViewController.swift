@@ -179,7 +179,7 @@ extension DemoViewController: CaseContainerDelegate {
             progress: \(progress)
             
             """)
-        imageView?.alpha = progress
+        imageView?.alpha = 1 - progress
     }
 }
 
