@@ -241,7 +241,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             }
         }else if scrollView === containerScrollView {
             let maxiumOffsetY = v.headerView.frame.height
-            let progress = max(containerScrollView.contentOffset.y / maxiumOffsetY, 1.0)
+            let progress = 1 k- (containerScrollView.contentOffset.y / maxiumOffsetY)
             delegate?.caseContainer?(parallaxHeader: progress)
             
         }
