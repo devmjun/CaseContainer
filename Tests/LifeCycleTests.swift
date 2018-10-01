@@ -34,15 +34,17 @@ class LifeCycleTests: XCTestCase {
         }
         sut = nil
         UIApplication.shared.keyWindow?.rootViewController = nil
-        
-        wait(for: [expectation], timeout: 2)
+
+        XCTWaiter().wait(for: [expectation], timeout: 2)
     }
 }
 
 extension LifeCycleTests {
     class MockDemoViewController: DemoViewController {
         var calledDeinit: (() -> Void)?
-        deinit { calledDeinit?() }
+        deinit {
+            calledDeinit?()
+        }
     }
 }
 
