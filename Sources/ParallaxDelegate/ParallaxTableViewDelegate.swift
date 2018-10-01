@@ -44,8 +44,8 @@ extension CaseContainerViewController: ParallaxTableViewDelegate {
             }
         }
         
-        let progress = containerScrollView.contentOffset.y / maxiumParallaxY
-        delegate?.caseContainer?(parallaxHeader: progress)
+//        let progress = containerScrollView.contentOffset.y / maxiumParallaxY
+//        delegate?.caseContainer?(parallaxHeader: progress)
     }
 }
 
