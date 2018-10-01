@@ -21,7 +21,6 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         if #available(iOS 11, *) {
             $0.contentInsetAdjustmentBehavior = .never
         }
-        
         $0.backgroundColor = .white
         return $0
     }(UIScrollView(frame: CGRect.zero))
@@ -47,6 +46,11 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         $0.isDirectionalLockEnabled = true
         $0.showsVerticalScrollIndicator = false
         $0.isPagingEnabled = true
+        
+        if #available(iOS 11, *) {
+            $0.contentInsetAdjustmentBehavior = .never
+        }
+
         return $0
     }(UIScrollView(frame: CGRect.zero))
     
@@ -63,6 +67,21 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         return $0
     }(UIView(frame: CGRect.zero))
     
+    public var tabBarHeight: CGFloat {
+        guard let homeIndicator = UIApplication.shared.windows.first,
+            let tabBarController = vc.tabBarController else {
+                return 0
+        }
+        let tabBarHeight = tabBarController.tabBar.frame.height
+        
+        if #available(iOS 11.0, *) {
+            let homeIndicatorHeight = homeIndicator.safeAreaInsets.bottom
+            return tabBarHeight + homeIndicatorHeight
+        } else {
+            return tabBarHeight
+        }
+    }
+    
     struct UI {
         var headerViewHeight: CGFloat
         var tabScrollViewHeight: CGFloat
@@ -70,22 +89,17 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         var contentsScrollViewContentSize: CGSize
         var containerScrollViewContentSize: CGSize
         
-        init(needs numberOfChildVC: [UIViewController],
+        init(containerViewController: CaseContainerViewController,
              headerHeight: CGFloat,
-             tabScrollHeaight: CGFloat, viewController: CaseContainerViewController) {
-            guard numberOfChildVC.count > 0  else {
+             tabScrollHeaight: CGFloat,
+             tabBarHeight: CGFloat) {
+            guard containerViewController.viewContorllers.count > 0  else {
                 fatalError("you must Implement ChildViewController")
             }
-            let numberOfChildVierControlelr: CGFloat = CGFloat(numberOfChildVC.count)
+            let numberOfChildVierControlelr: CGFloat = CGFloat(containerViewController.viewContorllers.count)
             headerViewHeight = headerHeight
             tabScrollViewHeight = tabScrollHeaight
             
-            var tabBarHeight: CGFloat = 0
-            if let tabBarController = viewController.tabBarController,
-                tabBarController.tabBar.isHidden == false  {
-                tabBarHeight = tabBarController.tabBar.frame.height
-            }
-                        
             contentsScrollViewFrameSize = CGSize(
                 width: UIScreen.mainWidth,
                 height: UIScreen.mainHeight - (UIApplication.statusBarHeight + tabScrollViewHeight + tabBarHeight))
@@ -93,10 +107,6 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             contentsScrollViewContentSize = CGSize(
                 width: UIScreen.mainWidth * numberOfChildVierControlelr,
                 height: contentsScrollViewFrameSize.height)
-            
-//            contentsScrollViewContentSize = CGSize(
-//                width: UIScreen.mainWidth * numberOfChildVierControlelr,
-//                height: UIScreen.mainHeight - UIApplication.statusBarHeight)
             
             containerScrollViewContentSize = CGSize(
                 width: UIScreen.mainWidth,
@@ -106,9 +116,10 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
     }
     
     lazy var ui = UI(
-        needs: vc.viewContorllers,
+        containerViewController: vc,
         headerHeight: vc.appearence.headerHeight,
-        tabScrollHeaight: vc.appearence.tabScrollHegiht, viewController: vc)
+        tabScrollHeaight: vc.appearence.tabScrollHegiht,
+        tabBarHeight: tabBarHeight)
     
     
     override func setupUI() {
@@ -130,7 +141,18 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         contentsScrollView.addSubview(horizonCanvasView)
         verticalCanvasView.addSubviews([headerView, tabScrollView, contentsScrollView])
         
-        let _bottomHeight: CGFloat = vc.tabBarController == nil ? 0 : vc.tabBarController!.tabBar.frame.height
+        // 원래는 tabBar hegiht 83, 여기서는 49, home indicator 34..
+        // 힌트 얻음 po UIApplication.shared.keyWindow?.rootViewController!.view.value(forKey: "adjustedContentInset") as? UIEdgeInsets
+        var _bottomHeight: CGFloat = tabBarHeight//vc.tabBarController == nil ? 0 : vc.tabBarController!.tabBar.frame.height
+        
+        if #available(iOS 11, *) {
+            
+            
+
+        }else {
+            
+        }
+        
         
         containerScrollView
             .topAnchor(to: layoutMarginsGuide.topAnchor)
@@ -169,7 +191,6 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             .activateAnchors()
         
         /// ViewControllers that are added on initilization add parent ViewController's childViewController
-        
         guard vc.viewContorllers.count > 0 else {
             fatalError("You must be to add container view controller's child view controller when it is initializaed")
         }
@@ -181,7 +202,6 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         }
         
         setupChildViewController(of: vc.viewContorllers)
-        
     }
     
     override func setupBinding() {
@@ -217,7 +237,6 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         
         initialChildVC.didMove(toParent: vc)
     }
-    
 }
 
 
