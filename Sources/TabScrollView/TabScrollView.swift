@@ -106,7 +106,6 @@ open class TabScrollView: UIScrollView {
             btn.highLightedColor = tabBarColor.highLight
             btn.status = i == 0 ? .on : .off
             btn.addTarget(vc, action: #selector(vc.tabButtonAction(_:)), for: .touchUpInside)
-            btn.layer.borderColor
             _horizontalCanvas.addSubview(btn)
             buttons.append(btn)
         }
