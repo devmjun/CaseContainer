@@ -22,30 +22,33 @@ extension CaseContainerViewController: ParallaxTableViewDelegate {
         if scrollingUp {
             if scrollView == tableView {
                 if v.containerScrollView.contentOffset.y < maxiumParallaxY && !childScrollingDownDueToParent {
-                    v.containerScrollView.contentOffset.y = max(
-                        min(v.containerScrollView.contentOffset.y + tableView.contentOffset.y, maxiumParallaxY), 0)
+                    let offsetY = max(min(v.containerScrollView.contentOffset.y + tableView.contentOffset.y, maxiumParallaxY), 0)
+                    v.containerScrollView.contentOffset.y = offsetY
                     tableView.contentOffset.y = 0
+                    v.headerView.frame.origin.y = offsetY * 0.5
                 }
             }
         } else {
             if scrollView == tableView {
                 if tableView.contentOffset.y < 0 && v.containerScrollView.contentOffset.y > 0 {
-                    v.containerScrollView.contentOffset.y = max(v.containerScrollView.contentOffset.y - abs(tableView.contentOffset.y), 0)
+                    let offsetY = max(v.containerScrollView.contentOffset.y - abs(tableView.contentOffset.y), 0)
+                    v.containerScrollView.contentOffset.y = offsetY
+                    v.headerView.frame.origin.y = offsetY * 0.5
                 }
             }
             
             if scrollView == v.containerScrollView {
                 if tableView.contentOffset.y > 0 && v.containerScrollView.contentOffset.y < maxiumParallaxY {
                     childScrollingDownDueToParent = true
-                    tableView.contentOffset.y = max(tableView.contentOffset.y - (maxiumParallaxY - v.containerScrollView.contentOffset.y), 0)
+                    let offsetY = max(tableView.contentOffset.y - (maxiumParallaxY - v.containerScrollView.contentOffset.y), 0)
+                    tableView.contentOffset.y = offsetY
                     v.contentsScrollView.contentOffset.y = maxiumParallaxY
                     childScrollingDownDueToParent = false
+                    
+                    v.headerView.frame.origin.y = offsetY * 0.5
                 }
             }
         }
-        
-//        let progress = containerScrollView.contentOffset.y / maxiumParallaxY
-//        delegate?.caseContainer?(parallaxHeader: progress)
     }
 }
 
