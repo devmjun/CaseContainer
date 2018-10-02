@@ -24,8 +24,6 @@ class TestingFrameWithTabBar: XCTestCase {
         sut.v.layoutIfNeeded()
         
         tabBarHeight = sut.tabBarController?.tabBar.frame.height
-        
-        
     }
     
     override func tearDown() {
@@ -55,7 +53,5 @@ class TestingFrameWithTabBar: XCTestCase {
         let convertContentScrollViewRect = sut.v.contentsScrollView.convert(sut.v.contentsScrollView.bounds, to: sut.v)
         
         XCTAssertEqual(convertContentScrollViewRect, rect)
-        
     }
-    
 }

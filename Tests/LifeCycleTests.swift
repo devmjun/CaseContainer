@@ -34,7 +34,6 @@ class LifeCycleTests: XCTestCase {
         }
         sut = nil
         UIApplication.shared.keyWindow?.rootViewController = nil
-
         XCTWaiter().wait(for: [expectation], timeout: 2)
     }
 }
