@@ -38,8 +38,6 @@ open class CaseContainerBaseViewController: UIViewController, CaseContainerBaseV
             tabButtonColor: (normal: .gray, highLight: .black))
         super.init(nibName: nil, bundle: nil)
     }
-    
-    
 }
 
 
