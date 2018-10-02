@@ -18,7 +18,7 @@ CaseContainer requires iOS 9 or above and is written in Swift 4.2
 CaseContainer is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your podfile: 
 
 ```ruby
-pod 'CaseContainer', '~> 0.2.0'
+pod 'CaseContainer', '~> 0.3.0'
 ```
 
 And run  `pod install`. 
