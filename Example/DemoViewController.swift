@@ -80,7 +80,7 @@ class DemoViewController: CaseContainerViewController {
         viewContorllers = [childViewController1, childViewController2, childViewController3, childViewController4, childViewController5, childViewController6]
     
         // 3
-        appearence = Appearence(
+        appearence = Appearance(
             headerViewHegiht: 300, tabScrollViewHeight: 50,
             indicatorColor: .green,
             tabButtonColor: (normal: .gray, highLight: .black))
@@ -93,7 +93,7 @@ class DemoViewController: CaseContainerViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    required init(maintain: [UIViewController], appearence: Appearence) {
+    required init(maintain: [UIViewController], appearence: Appearance) {
         super.init(maintain: maintain, appearence: appearence)
     }
     
@@ -113,81 +113,81 @@ class DemoViewController: CaseContainerViewController {
 }
 
 extension DemoViewController: CaseContainerDelegate {
-//    func caseContainer(
-//        caseContainerViewController: CaseContainerViewController,
-//        scrollViewWillBeginDragging scrollView: UIScrollView) {
-//        print("""
-//            
-//            \(#function)
-//            caseContainerViewController: \(caseContainerViewController)
-//            scrollViewWillBeginDragging: \(scrollView)
-//            
-//            """)
-//    }
-//    func caseContainer(
-//        caseContainerViewController: CaseContainerViewController,
-//        progress: CGFloat,
-//        index: Int,
-//        scrollViewDidScroll scrollView: UIScrollView) {
-//        print("""
-//            
-//            \(#function)
-//            caseContainerViewController: \(caseContainerViewController)
-//            progress: \(progress)
-//            index: \(index)
-//            scrollView:\(scrollView)
-//            
-//            """)
-//    }
-//    func caseContainer(
-//        caseContainerViewController: CaseContainerViewController,
-//        index: Int,
-//        scrollViewDidEndDragging scrollView: UIScrollView) {
-//        print("""
-//            
-//            /\(#function)
-//            caseContainerViewController: \(caseContainerViewController)
-//            index: \(index)
-//            scrollView:\(scrollView)
-//            
-//            """)
-//    }
-//    func caseContainer(
-//        caseContainerViewController: CaseContainerViewController,
-//        index: Int,
-//        scrollViewDidEndDecelerating scrollView: UIScrollView) {
-//        print("""
-//            
-//            \(#function)
-//            caseContainerViewController: \(caseContainerViewController)
-//            scrollView:\(scrollView)
-//            
-//            """)
-//        
-//    }
-//    func caseContainer(
-//        caseContainerViewController: CaseContainerViewController,
-//        didSelectTabButton tabButton: TabButton,
-//        prevIndex: Int,
-//        index: Int) {
-//        print("""
-//            
-//            \(#function)
-//            caseContainerViewController: \(caseContainerViewController)
-//            didSelectTabButton: \(tabButton)
-//            prevIndex: \(prevIndex)
-//            index: \(index)
-//            
-//            """)
-//    }
-//    func caseContainer(parallaxHeader progress: CGFloat) {
-//        print("""
-//            
-//            \(#function)
-//            progress: \(progress)
-//            
-//            """)
-//        imageView?.alpha = 1 - progress
-//    }
+    func caseContainer(
+        caseContainerViewController: CaseContainerViewController,
+        scrollViewWillBeginDragging scrollView: UIScrollView) {
+        print("""
+            
+            \(#function)
+            caseContainerViewController: \(caseContainerViewController)
+            scrollViewWillBeginDragging: \(scrollView)
+            
+            """)
+    }
+    func caseContainer(
+        caseContainerViewController: CaseContainerViewController,
+        progress: CGFloat,
+        index: Int,
+        scrollViewDidScroll scrollView: UIScrollView) {
+        print("""
+            
+            \(#function)
+            caseContainerViewController: \(caseContainerViewController)
+            progress: \(progress)
+            index: \(index)
+            scrollView:\(scrollView)
+            
+            """)
+    }
+    func caseContainer(
+        caseContainerViewController: CaseContainerViewController,
+        index: Int,
+        scrollViewDidEndDragging scrollView: UIScrollView) {
+        print("""
+            
+            /\(#function)
+            caseContainerViewController: \(caseContainerViewController)
+            index: \(index)
+            scrollView:\(scrollView)
+            
+            """)
+    }
+    func caseContainer(
+        caseContainerViewController: CaseContainerViewController,
+        index: Int,
+        scrollViewDidEndDecelerating scrollView: UIScrollView) {
+        print("""
+            
+            \(#function)
+            caseContainerViewController: \(caseContainerViewController)
+            scrollView:\(scrollView)
+            
+            """)
+        
+    }
+    func caseContainer(
+        caseContainerViewController: CaseContainerViewController,
+        didSelectTabButton tabButton: TabButton,
+        prevIndex: Int,
+        index: Int) {
+        print("""
+            
+            \(#function)
+            caseContainerViewController: \(caseContainerViewController)
+            didSelectTabButton: \(tabButton)
+            prevIndex: \(prevIndex)
+            index: \(index)
+            
+            """)
+    }
+    func caseContainer(parallaxHeader progress: CGFloat) {
+        print("""
+            
+            \(#function)
+            progress: \(progress)
+            
+            """)
+        imageView?.alpha = 1 - progress
+    }
 }
 

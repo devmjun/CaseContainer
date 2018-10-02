@@ -50,7 +50,10 @@ class StartViewController: UITableViewController {
                 show(viewController, sender: nil)
             case .withTabBarController:
                 let tabBarViewController = UITabBarController()
-                tabBarViewController.viewControllers = [DemoViewController(), DemoViewController()]
+                let childVC = DemoViewController()
+                childVC.title = "TabBar"
+                tabBarViewController.viewControllers = [childVC]
+                
                 show(tabBarViewController, sender: nil)
             }
         }

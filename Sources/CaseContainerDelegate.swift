@@ -7,33 +7,33 @@
 //
 
 import UIKit
-@objc public protocol CaseContainerDelegate: class {
-    @objc optional func caseContainer(
+public protocol CaseContainerDelegate: class {
+    func caseContainer(
         caseContainerViewController: CaseContainerViewController,
         scrollViewWillBeginDragging scrollView: UIScrollView)
     
-    @objc optional func caseContainer(
+    func caseContainer(
         caseContainerViewController: CaseContainerViewController,
         progress: CGFloat,
         index: Int,
         scrollViewDidScroll scrollView: UIScrollView)
     
-    @objc optional func caseContainer(
+    func caseContainer(
         caseContainerViewController: CaseContainerViewController,
         index: Int,
         scrollViewDidEndDragging scrollView: UIScrollView)
     
-    @objc optional func caseContainer(
+    func caseContainer(
         caseContainerViewController: CaseContainerViewController,
         index: Int,
         scrollViewDidEndDecelerating scrollView: UIScrollView)
     
-    @objc optional func caseContainer(
+    func caseContainer(
         caseContainerViewController: CaseContainerViewController,
         didSelectTabButton tabButton: TabButton,
         prevIndex: Int,
         index: Int)
     
-    @objc optional func caseContainer(parallaxHeader progress: CGFloat)
+    func caseContainer(parallaxHeader progress: CGFloat)
 }
 

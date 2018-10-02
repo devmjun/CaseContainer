@@ -9,17 +9,17 @@ import UIKit
 
 public protocol CaseContainerBaseViewContollerType: class {
     var viewContorllers: [UIViewController] { get }
-    var appearence: Appearence { get }
-    init(maintain: [UIViewController], appearence: Appearence)
+    var appearence: Appearance { get }
+    init(maintain: [UIViewController], appearence: Appearance)
     init()
 }
 
 open class CaseContainerBaseViewController: UIViewController, CaseContainerBaseViewContollerType  {
     
     public var viewContorllers: [UIViewController]
-    public var appearence: Appearence
+    public var appearence: Appearance
     
-    required public init(maintain: [UIViewController], appearence: Appearence) {
+    required public init(maintain: [UIViewController], appearence: Appearance) {
         self.viewContorllers = maintain
         self.appearence = appearence
         super.init(nibName: nil, bundle: nil)
@@ -31,7 +31,7 @@ open class CaseContainerBaseViewController: UIViewController, CaseContainerBaseV
     
     required public init() {
         self.viewContorllers = Array<UIViewController>()
-        self.appearence = Appearence(
+        self.appearence = Appearance(
             headerViewHegiht: 150,
             tabScrollViewHeight: 44,
             indicatorColor: .green,

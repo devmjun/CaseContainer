@@ -52,7 +52,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
             removeWithout(index)
             goTo(index)
             
-            delegate?.caseContainer?(
+            delegate?.caseContainer(
                 caseContainerViewController: self,
                 didSelectTabButton: sender,
                 prevIndex: currentViewControllerIdnex,
@@ -185,7 +185,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             preventingException = false
         }
         
-        delegate?.caseContainer?(
+        delegate?.caseContainer(
             caseContainerViewController: self,
             scrollViewWillBeginDragging: scrollView)
         
@@ -223,7 +223,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
                             progress: _percentComplete, scrollView: scrollView)
                     }
                     
-                    delegate?.caseContainer?(
+                    delegate?.caseContainer(
                         caseContainerViewController: self,
                         progress: _percentComplete,
                         index: Int(scrollViewStatus.originIndex),
@@ -250,13 +250,13 @@ extension CaseContainerViewController: UIScrollViewDelegate {
                     }
                 }
             }
-            delegate?.caseContainer?(parallaxHeader: progress)
+            delegate?.caseContainer(parallaxHeader: progress)
             
         }
     }
     
     open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        delegate?.caseContainer?(
+        delegate?.caseContainer(
             caseContainerViewController: self,
             index: Int(scrollViewStatus.originIndex),
             scrollViewDidEndDragging: scrollView)
@@ -294,7 +294,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         /// prevent TabScrollView's indicator from getting out of doing before updating - 1
         preventingException = true
         
-        delegate?.caseContainer?(
+        delegate?.caseContainer(
             caseContainerViewController: self,
             index: Int(scrollViewStatus.currentIndex),
             scrollViewDidEndDecelerating: scrollView)

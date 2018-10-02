@@ -24,7 +24,7 @@
 		04DBEE11215A279C009750F2 /* CaseContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04DBEE03215A279C009750F2 /* CaseContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04DBEE1F215A2A2B009750F2 /* CaseContainerBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */; };
 		04DBEE21215A2A33009750F2 /* CaseContainerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */; };
-		04DBEE23215A2A39009750F2 /* Appearence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE22215A2A39009750F2 /* Appearence.swift */; };
+		04DBEE23215A2A39009750F2 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE22215A2A39009750F2 /* Appearance.swift */; };
 		04DBEE25215A2A80009750F2 /* CaseContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE24215A2A80009750F2 /* CaseContainerView.swift */; };
 		04DBEE27215A2A8E009750F2 /* CaseContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE26215A2A8E009750F2 /* CaseContainerViewController.swift */; };
 		04DBEE29215A2A95009750F2 /* CaseContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE28215A2A95009750F2 /* CaseContainerDelegate.swift */; };
@@ -92,7 +92,7 @@
 		04DBEE04215A279C009750F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerBaseView.swift; sourceTree = "<group>"; };
 		04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerBaseViewController.swift; sourceTree = "<group>"; };
-		04DBEE22215A2A39009750F2 /* Appearence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearence.swift; sourceTree = "<group>"; };
+		04DBEE22215A2A39009750F2 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		04DBEE24215A2A80009750F2 /* CaseContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerView.swift; sourceTree = "<group>"; };
 		04DBEE26215A2A8E009750F2 /* CaseContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerViewController.swift; sourceTree = "<group>"; };
 		04DBEE28215A2A95009750F2 /* CaseContainerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerDelegate.swift; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 			children = (
 				04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */,
 				04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */,
-				04DBEE22215A2A39009750F2 /* Appearence.swift */,
+				04DBEE22215A2A39009750F2 /* Appearance.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -417,7 +417,7 @@
 				04DBEE39215A2C51009750F2 /* UIapplication+StatusBar.swift in Sources */,
 				04DBEE29215A2A95009750F2 /* CaseContainerDelegate.swift in Sources */,
 				04DBEE25215A2A80009750F2 /* CaseContainerView.swift in Sources */,
-				04DBEE23215A2A39009750F2 /* Appearence.swift in Sources */,
+				04DBEE23215A2A39009750F2 /* Appearance.swift in Sources */,
 				04DBEE27215A2A8E009750F2 /* CaseContainerViewController.swift in Sources */,
 				04DBEE1F215A2A2B009750F2 /* CaseContainerBaseView.swift in Sources */,
 				04DBEE33215A2BE7009750F2 /* UIView+AddSubView.swift in Sources */,
