@@ -2,8 +2,8 @@
 
 ![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg) [![Build Status](https://travis-ci.org/devminjun/CaseContainer.svg?branch=master)](https://travis-ci.org/devminjun/CaseContainer) [![pod compatible](https://img.shields.io/cocoapods/v/CaseContainer.svg?style=flat)](https://cocoapods.org/pods/CaseContainer) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![codecov](https://codecov.io/gh/devminjun/CaseContainer/branch/master/graph/badge.svg)](https://codecov.io/gh/devminjun/CaseContainer)
 
-![CaseContainer_0](img/readme/CaseContainer_0.gif)
-![CaseContainer_1](img/readme/CaseContainer_1.gif)
+![CaseContainer_0](/img/readme/CaseContainer_0.gif)
+![CaseContainer_1](/img/readme/CaseContainer_1.gif)
 
 CaseContainer is *Container View Controller*
 
