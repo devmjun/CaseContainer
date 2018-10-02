@@ -17,10 +17,11 @@ open class TabScrollView: UIScrollView {
     open private(set) var status: Status = .normal
     
     open var _horizontalCanvas = UIView()
-    var indicator: UIView = {
+    var indicator: UIView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        return $0
-    }(UIView(frame: CGRect.zero))
+    }
+
+    
     
     public var buttonsRect = Array<CGRect>()
     open private(set) var buttons = Array<TabButton>()
@@ -114,19 +115,14 @@ open class TabScrollView: UIScrollView {
     }
     
     public func reload(_ index: Int) {
-        // indicator origin x
-        // indicator width
-        // tabScrollView contentOffset
-        
         guard index < self.buttonsRect.count else { return }
         let buttonRect = buttonsRect[index]
         let limitingValue = contentSize.width - UIScreen.mainWidth
         let convertOffsetX = (buttonRect.minX / 2 >= limitingValue) ? limitingValue : buttonRect.minX / 2
         
-        indicator.frame.origin.x = buttonRect.minX
-        indicator.frame.size.width = buttonRect.width
+        indicator.layer.frame.origin.x = buttonRect.minX
+        indicator.layer.frame.size.width = buttonRect.width
         contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
-        
     }
     
     public func scrollingSynchronization(
@@ -159,7 +155,8 @@ open class TabScrollView: UIScrollView {
         let limitingValue = contentSize.width - UIScreen.mainWidth
         let convertOffsetX = (convertOriginX / 2 >= limitingValue) ? limitingValue : convertOriginX / 2
         
-        indicator.frame.origin.x = convertOriginX
+        
+        indicator.layer.frame.origin.x = convertOriginX
         contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
         
         let prevButtonWidth = buttonsRect[index].width
@@ -172,13 +169,13 @@ open class TabScrollView: UIScrollView {
             if currentButtonWidth > prevButtonWidth {
                 let decreaseValue = (currentButtonWidth - prevButtonWidth) * progress
                 let newConvertWidth = currentButtonWidth - decreaseValue
-                indicator.frame.size.width = newConvertWidth
+                indicator.layer.frame.size.width = newConvertWidth
             }
             
             // If the current button's width is smaller than the previous button's width
         }else {
             if convertWidth >= currentButtonWidth {
-                indicator.frame.size.width = convertWidth
+                indicator.layer.frame.size.width = convertWidth
             }
         }
     }
@@ -199,9 +196,9 @@ open class TabScrollView: UIScrollView {
         let convertOriginX = (contentScrollViewOriginX - destination) * ratio + originX
         
         let limitingValue = contentSize.width - UIScreen.mainWidth
-        let convertOffsetX = (convertOriginX/2 >= limitingValue) ? limitingValue : convertOriginX / 2
+        let convertOffsetX = (convertOriginX / 2 >= limitingValue) ? limitingValue : convertOriginX / 2
         
-        indicator.frame.origin.x = convertOriginX
+        indicator.layer.frame.origin.x = convertOriginX
         contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
         
         // Synchronize indicator's width
@@ -216,14 +213,14 @@ open class TabScrollView: UIScrollView {
             if currentButtonWidth > nextButtonWidth {
                 let decreaseValue = (currentButtonWidth - nextButtonWidth) * progress
                 let newConvertWidth = currentButtonWidth - decreaseValue
-                indicator.frame.size.width = newConvertWidth
+                indicator.layer.frame.size.width = newConvertWidth
             }
             
             // If the current button's width is smaller then next button's width
             // Start resizing from the 'point' where the button's width you want to change is smaller than the current button's width
         }else {
             if convertWidth >= currentButtonWidth {
-                indicator.frame.size.width = convertWidth
+                indicator.layer.frame.size.width = convertWidth
             }
         }
     }

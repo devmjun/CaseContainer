@@ -33,7 +33,6 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
         super.viewDidLoad()
     }
     
-    
     /// didSelect TabButton
     @objc func tabButtonAction(_ sender: TabButton) {
         let index = sender.tag
@@ -203,8 +202,8 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             scrollViewStatus.currentIndex = floor( (offsetX - contentsWidth / 2) / contentsWidth ) + 1
             scrollViewStatus.originIndex = floor( (offsetX - contentsWidth) / contentsWidth ) + 1
             
-            if let _startDraggingOffsetX = scrollViewStatus.startDraggingOffsetX {
-                guard let presentedChildVC = children.first else { return }
+            if let _startDraggingOffsetX = scrollViewStatus.startDraggingOffsetX,
+                let presentedChildVC = children.first {
                 
                 let scrollingToward = _startDraggingOffsetX > offsetX /* true is going to nextPage, false is going to previous Page */
                 let percent = (offsetX - _startDraggingOffsetX) / scrollView.bounds.width * 1.1
@@ -213,7 +212,6 @@ extension CaseContainerViewController: UIScrollViewDelegate {
                 
                 if let index = scrollingToward ? prevIndex(n: viewControllerIndex(presentedChildVC)) : nextIndex(n: viewControllerIndex(presentedChildVC)),
                     index < viewContorllers.count && index > -1 {
-                    
                     // true if scrolling to the next, false if scrolling to the previous
                     if scrollingToward {
                         v.tabScrollView.scrollingSynchronization(
@@ -242,6 +240,16 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         }else if scrollView === containerScrollView {
             let maxiumOffsetY = v.headerView.frame.height
             let progress = containerScrollView.contentOffset.y / maxiumOffsetY
+            
+            // temporarily...
+            // To synchronize the contentOffset of the child view controller, contentOffset of the container ScrollView
+            if progress == 0 {
+                viewContorllers.forEach {
+                    if $0 is ParallaxTableViewController {
+                        ($0 as? ParallaxTableViewController)?.tableView.contentOffset = CGPoint.zero
+                    }
+                }
+            }
             delegate?.caseContainer?(parallaxHeader: progress)
             
         }

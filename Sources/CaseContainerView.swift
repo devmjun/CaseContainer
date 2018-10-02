@@ -9,7 +9,7 @@
 import UIKit
 
 open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController> {
-    public private(set) var containerScrollView: UIScrollView = {
+    public private(set) var containerScrollView = UIScrollView().then {
         $0.backgroundColor = .white
         $0.showsHorizontalScrollIndicator = false
         $0.showsVerticalScrollIndicator = false
@@ -21,51 +21,40 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         if #available(iOS 11, *) {
             $0.contentInsetAdjustmentBehavior = .never
         }
-        $0.backgroundColor = .white
-        return $0
-    }(UIScrollView(frame: CGRect.zero))
+    }
     
     /**
      This property is containerScrollView's contentView
      */
-    lazy public private(set) var verticalCanvasView: UIView = {
+    lazy public private(set) var verticalCanvasView = UIView().then {
         $0.backgroundColor = .white
-        return $0
-    }(UIView(frame: CGRect.zero))
+    }
     
-    public var headerView: UIView = {
+    public var headerView: UIView = UIView().then {
         $0.backgroundColor = .white
-        return $0
-    }(UIView(frame: CGRect.zero))
+    }
     
     public var tabScrollView = TabScrollView()
     
-    public var contentsScrollView: UIScrollView = {
+    public var contentsScrollView = UIScrollView().then {
         $0.bounces = false
         $0.backgroundColor = .white
         $0.isDirectionalLockEnabled = true
         $0.showsVerticalScrollIndicator = false
         $0.isPagingEnabled = true
-        
-        if #available(iOS 11, *) {
-            $0.contentInsetAdjustmentBehavior = .never
-        }
-
-        return $0
-    }(UIScrollView(frame: CGRect.zero))
+    }
     
     /**
      This propery is ContentsScrollView's Content View
      */
-    lazy public private(set) var horizonCanvasView: UIView = {
+    lazy public private(set) var horizonCanvasView = UIView().then {
         let rect = CGRect(
             x: 0, y: 0,
             width: ui.contentsScrollViewContentSize.width,
             height: ui.contentsScrollViewContentSize.height)
         $0.frame = rect
         $0.backgroundColor = .white
-        return $0
-    }(UIView(frame: CGRect.zero))
+    }
     
     public var tabBarHeight: CGFloat {
         guard let homeIndicator = UIApplication.shared.windows.first,
@@ -216,6 +205,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         if initialChildVC is ParallaxTableViewController {
             initialChildVC.view.frame = CGRect(x: 0, y: 0, width: ui.contentsScrollViewFrameSize.width, height: ui.contentsScrollViewContentSize.height)
         }else {
+        // if it is not ParallaxTableViewController
             let vaildViewHeight = UIScreen.mainHeight - UIApplication.statusBarHeight
             let scaleRatio = ui.contentsScrollViewContentSize.height / vaildViewHeight
             initialChildVC.view.transform = CGAffineTransform(scaleX: 1.0, y: scaleRatio)
