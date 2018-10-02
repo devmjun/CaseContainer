@@ -25,6 +25,10 @@ class ChildTableViewController: ParallaxTableViewController {
         return 30
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -48,15 +52,12 @@ class ChildTableViewController: ParallaxTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = "\(indexPath) + \(self.title!)"
-        print("현재 인덱스:\(indexPath.row), title: \(title), cellFrame: \(cell.frame.height)")
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)!
         let vc = DemoViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        
+        navigationController?.pushViewController(vc, animated: true)   
     }
 }
 

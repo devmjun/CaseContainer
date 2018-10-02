@@ -10,52 +10,80 @@ import UIKit
 import CaseContainer
 
 class DemoViewController: CaseContainerViewController {
+    var dismissButton: UIButton = {
+        let rect = CGRect(x: UIScreen.mainWidth - 50 , y: 44, width: 50, height: 50)
+        var btn = UIButton(frame: rect)
+        btn.setTitle("X", for: .normal)
+        btn.setTitleColor(UIColor.blue.withAlphaComponent(0.8), for: .normal)
+        return btn
+    }()
     
-    var myValue: Int = 10
+    @objc func dismissButtonAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    var imageView: UIImageView?
+    
+    override func loadView() {
+        super.loadView()
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         delegate = self
+        
+        dismissButton.addTarget(
+            self,
+            action: #selector(dismissButtonAction(_:)),
+            for: .touchUpInside)
+        
+        view.addSubview(dismissButton)
+        dismissButton.bringSubviewToFront(containerScrollView)
+        
+        imageView = UIImageView(image: UIImage(named: "swiss.jpg"))
+        if let imageView = imageView {
+            headerView.addSubview(imageView)
+            imageView.frame = CGRect(x: 0, y: 0,
+                                     width: UIScreen.mainWidth, height: appearence.headerHeight)
+        }
     }
     
     required init() {
         super.init()
-        let vc = ChildTableViewController()
-        vc.title = "tabtab1"
-        vc.delegate = self
-        
-        let vc1 = ChildTableViewController()
-        vc1.title = "tabtab2"
-        vc1.delegate = self
-        
-        let vc2 = ChildTableViewController()
-        vc2.title = "tabtabtab3"
-        vc2.delegate = self
-        
-        let vc3 = ChildTableViewController()
-        vc3.title = "tabtabtabtabtab4"
-        vc3.delegate = self
-        
-        let vc4 = ChildTableViewController()
-        vc4.title = "tab5"
-        vc4.delegate = self
-        
-        let vc5 = ChildTableViewController()
-        vc5.title = "tabtabtabtabtabtab6"
-        vc5.delegate = self
-        
         // 1
-        viewContorllers = [vc, vc1, vc2, vc3, vc4, vc5]
+        let childViewController1 = ChildTableViewController()
+        childViewController1.title = "First Tab"
+        childViewController1.delegate = self
+
+        let childViewController2 = ChildTableViewController()
+        childViewController2.title = "Second Tab"
+        childViewController2.delegate = self
+
+        let childViewController3 = ChildTableViewController()
+        childViewController3.title = "Third Tab"
+        childViewController3.delegate = self
         
+        let childViewController4 = ChildTableViewController()
+        childViewController4.title = "Fourth Tab"
+        childViewController4.delegate = self
         
+        let childViewController5 = ChildTableViewController()
+        childViewController5.title = "Fifth Tab"
+        childViewController5.delegate = self
+
+        let childViewController6 = OrdinaryViewController()
+        childViewController6.title = "Sixth Tab"
+
         // 2
-        appearence = Appearence(
+        viewContorllers = [childViewController1, childViewController2, childViewController3, childViewController4, childViewController5, childViewController6]
+    
+        // 3
+        appearence = Appearance(
             headerViewHegiht: 300, tabScrollViewHeight: 50,
             indicatorColor: .green,
             tabButtonColor: (normal: .gray, highLight: .black))
-        
-        
-        
         
     }
     
@@ -65,18 +93,16 @@ class DemoViewController: CaseContainerViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    required init(maintain: [UIViewController], appearence: Appearence) {
+    required init(maintain: [UIViewController], appearence: Appearance) {
         super.init(maintain: maintain, appearence: appearence)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         
     }
     
@@ -86,91 +112,82 @@ class DemoViewController: CaseContainerViewController {
     
 }
 
-extension DemoViewController {
-}
-
 extension DemoViewController: CaseContainerDelegate {
     func caseContainer(
         caseContainerViewController: CaseContainerViewController,
         scrollViewWillBeginDragging scrollView: UIScrollView) {
-        //        print("""
-        //
-        //            scrollViewWillBeginDragging!
-        //            caseContainerViewController: \(caseContainerViewController)
-        //            scrollView:\(scrollView)
-        //
-        //            """)
-        
+        print("""
+            
+            \(#function)
+            caseContainerViewController: \(caseContainerViewController)
+            scrollViewWillBeginDragging: \(scrollView)
+            
+            """)
     }
-    // 2
     func caseContainer(
         caseContainerViewController: CaseContainerViewController,
         progress: CGFloat,
         index: Int,
         scrollViewDidScroll scrollView: UIScrollView) {
-        //        print("""
-        //
-        //            scrollViewDidScroll
-        //            caseContainerViewController: \(caseContainerViewController)
-        //            progress: \(progress)
-        //            index: \(index)
-        //            scrollView:\(scrollView)
-        //
-        //            """)
-        
+        print("""
+            
+            \(#function)
+            caseContainerViewController: \(caseContainerViewController)
+            progress: \(progress)
+            index: \(index)
+            scrollView:\(scrollView)
+            
+            """)
     }
-    
-    // 3.
     func caseContainer(
         caseContainerViewController: CaseContainerViewController,
         index: Int,
         scrollViewDidEndDragging scrollView: UIScrollView) {
-        //        print("""
-        //
-        //            scrollViewDidEndDragging
-        //            caseContainerViewController: \(caseContainerViewController)
-        //            index: \(index)
-        //            scrollView:\(scrollView)
-        //
-        //            """)
-        
+        print("""
+            
+            /\(#function)
+            caseContainerViewController: \(caseContainerViewController)
+            index: \(index)
+            scrollView:\(scrollView)
+            
+            """)
     }
-    
-    // 4.
     func caseContainer(
         caseContainerViewController: CaseContainerViewController,
         index: Int,
         scrollViewDidEndDecelerating scrollView: UIScrollView) {
-        //        print("""
-        //
-        //            scrollViewDidEndDecelerating
-        //            caseContainerViewController: \(caseContainerViewController)
-        //            scrollView:\(scrollView)
-        //
-        //            """)
+        print("""
+            
+            \(#function)
+            caseContainerViewController: \(caseContainerViewController)
+            scrollView:\(scrollView)
+            
+            """)
         
     }
-    
-    // 5.
     func caseContainer(
         caseContainerViewController: CaseContainerViewController,
         didSelectTabButton tabButton: TabButton,
         prevIndex: Int,
         index: Int) {
-        //        print("""
-        //
-        //            didSelectTabButton: \(tabButton)
-        //            caseContainerViewController: \(caseContainerViewController)
-        //            prevIndex: \(prevIndex)
-        //            index: \(index)
-        //
-        //            """)
-        
+        print("""
+            
+            \(#function)
+            caseContainerViewController: \(caseContainerViewController)
+            didSelectTabButton: \(tabButton)
+            prevIndex: \(prevIndex)
+            index: \(index)
+            
+            """)
     }
-    
     func caseContainer(parallaxHeader progress: CGFloat) {
-        //        print("progres: \(progress)")
+        print("""
+            
+            \(#function)
+            progress: \(progress)
+            
+            """)
+        imageView?.alpha = 1 - progress
     }
-    
 }
 

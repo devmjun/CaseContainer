@@ -15,4 +15,3 @@ open class ParallaxTableViewController: UITableViewController {
         delegate?.scrollViewDidScroll(scrollView: scrollView, tableView: tableView)
     }
 }
-

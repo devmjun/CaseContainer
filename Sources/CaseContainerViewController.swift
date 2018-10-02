@@ -31,7 +31,6 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     /// didSelect TabButton
@@ -41,21 +40,19 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
             let currentViewControllerIdnex = viewControllerIndex(currentVC),
             currentViewControllerIdnex != index {
             UIView.animate(withDuration: 0.25) {
-                let buttonRect = self.tabScrollView.buttonsRect[index]
                 let contentsWidth = Int(UIScreen.mainWidth)
-                self.v.tabScrollView.indicator.frame.origin.x = buttonRect.minX
-                self.v.tabScrollView.indicator.frame.size.width = buttonRect.width
-                self.v.contentsScrollView.setContentOffset(CGPoint(x: contentsWidth*index, y: 0), animated: false)
-                self.v.tabScrollView.contentOffset.x = self.v.tabScrollView.buttonsRect[index].minX / 2
-                
+                self.v.tabScrollView.reload(index)
+                self.v.contentsScrollView.setContentOffset(
+                    CGPoint(x: contentsWidth * index, y: 0),animated: false)
             }
+            
             scrollViewStatus.currentIndex = CGFloat(index)
             buttonHighlight(index)
             buttonDehighlightWithout(index)
             removeWithout(index)
             goTo(index)
             
-            delegate?.caseContainer?(
+            delegate?.caseContainer(
                 caseContainerViewController: self,
                 didSelectTabButton: sender,
                 prevIndex: currentViewControllerIdnex,
@@ -63,7 +60,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
         }
     }
     
-    var isEndProcessing: Bool = false {
+    var preventingException: Bool = false {
         willSet {
             contentsScrollView.isUserInteractionEnabled = newValue
         }
@@ -85,14 +82,20 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
             if let childVC = viewContorllers.at(index) {
                 addChild(childVC)
                 v.horizonCanvasView.addSubview(childVC.view)
-                let indexWidth: CGFloat = v.ui.contentsScrollViewFrameSize.width
-                let rect = CGRect(
-                    x: indexWidth * CGFloat(index),
-                    y: 0,
-                    width: indexWidth,
-                    height: v.ui.contentsScrollViewContentSize.height)
                 
-                childVC.view.frame = rect
+                if childVC is ParallaxTableViewController {
+                    let indexWidth: CGFloat = v.ui.contentsScrollViewFrameSize.width
+                    let rect = CGRect(
+                        x: indexWidth * CGFloat(index), y: 0,
+                        width: indexWidth, height: v.ui.contentsScrollViewContentSize.height)
+                    childVC.view.frame = rect
+                }else {
+                    let vaildViewHeight = UIScreen.mainHeight - UIApplication.statusBarHeight
+                    let scaleRatio = v.ui.contentsScrollViewContentSize.height / vaildViewHeight
+                    childVC.view.transform = CGAffineTransform(scaleX: 1.0, y: scaleRatio)
+                    childVC.view.frame.origin = CGPoint(x: v.ui.contentsScrollViewFrameSize.width * CGFloat(index), y: 0)
+                }
+                
                 childVC.didMove(toParent: self)
                 childVC.beginAppearanceTransition(true, animated: true)
                 childVC.endAppearanceTransition()
@@ -149,6 +152,7 @@ extension CaseContainerViewController {
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         children.forEach { $0.endAppearanceTransition() }
+        
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
@@ -178,10 +182,10 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         if scrollView === v.contentsScrollView && scrollView !== v.tabScrollView   {
             scrollViewStatus.startDraggingOffsetX = scrollView.contentOffset.x
             /// prevent TabScrollView's indicator from getting out of doing before updating - 1
-            isEndProcessing = false
+            preventingException = false
         }
         
-        delegate?.caseContainer?(
+        delegate?.caseContainer(
             caseContainerViewController: self,
             scrollViewWillBeginDragging: scrollView)
         
@@ -193,15 +197,13 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         let direction = scrollView.panGestureRecognizer.translation(in: scrollView.superview).x
         let offsetX = scrollView.contentOffset.x
         
-        if scrollView === v.contentsScrollView &&
-            direction > 0 || direction < 0 &&
-            scrollView !== v.tabScrollView { /* explicitly, Call the scrollview because it uses a nested scrollView */
+        if scrollView === v.contentsScrollView && direction > 0 || direction < 0 && scrollView !== v.tabScrollView { /* explicitly, Call the scrollview because it uses a nested scrollView */
             // Switch Index when more than 50% of the previous/next page is visible
             scrollViewStatus.currentIndex = floor( (offsetX - contentsWidth / 2) / contentsWidth ) + 1
             scrollViewStatus.originIndex = floor( (offsetX - contentsWidth) / contentsWidth ) + 1
             
-            if let _startDraggingOffsetX = scrollViewStatus.startDraggingOffsetX {
-                guard let presentedChildVC = children.first else { return }
+            if let _startDraggingOffsetX = scrollViewStatus.startDraggingOffsetX,
+                let presentedChildVC = children.first {
                 
                 let scrollingToward = _startDraggingOffsetX > offsetX /* true is going to nextPage, false is going to previous Page */
                 let percent = (offsetX - _startDraggingOffsetX) / scrollView.bounds.width * 1.1
@@ -210,7 +212,6 @@ extension CaseContainerViewController: UIScrollViewDelegate {
                 
                 if let index = scrollingToward ? prevIndex(n: viewControllerIndex(presentedChildVC)) : nextIndex(n: viewControllerIndex(presentedChildVC)),
                     index < viewContorllers.count && index > -1 {
-                    
                     // true if scrolling to the next, false if scrolling to the previous
                     if scrollingToward {
                         v.tabScrollView.scrollingSynchronization(
@@ -222,7 +223,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
                             progress: _percentComplete, scrollView: scrollView)
                     }
                     
-                    delegate?.caseContainer?(
+                    delegate?.caseContainer(
                         caseContainerViewController: self,
                         progress: _percentComplete,
                         index: Int(scrollViewStatus.originIndex),
@@ -236,11 +237,26 @@ extension CaseContainerViewController: UIScrollViewDelegate {
                     scrollViewStatus.startDraggingOffsetX = ceil(scrollView.contentOffset.x)
                 }
             }
+        }else if scrollView === containerScrollView {
+            let maxiumOffsetY = v.headerView.frame.height
+            let progress = containerScrollView.contentOffset.y / maxiumOffsetY
+            
+            // temporarily...
+            // To synchronize the contentOffset of the child view controller, contentOffset of the container ScrollView
+            if progress == 0 {
+                viewContorllers.forEach {
+                    if $0 is ParallaxTableViewController {
+                        ($0 as? ParallaxTableViewController)?.tableView.contentOffset = CGPoint.zero
+                    }
+                }
+            }
+            delegate?.caseContainer(parallaxHeader: progress)
+            
         }
     }
     
     open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        delegate?.caseContainer?(
+        delegate?.caseContainer(
             caseContainerViewController: self,
             index: Int(scrollViewStatus.originIndex),
             scrollViewDidEndDragging: scrollView)
@@ -260,8 +276,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             
             // 2
             scrollViewStatus.currentIndex = floor( (contentOffsetX - contentsWidth / 2) / contentsWidth ) + 1
-            v.tabScrollView.indicator.frame.origin.x = v.tabScrollView.buttonsRect[currentIndex].origin.x
-            v.tabScrollView.indicator.frame.size.width = v.tabScrollView.buttonsRect[currentIndex].width
+            v.tabScrollView.reload(currentIndex)
             
             // 3
             buttonHighlight(currentIndex)
@@ -277,9 +292,9 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         }
         
         /// prevent TabScrollView's indicator from getting out of doing before updating - 1
-        isEndProcessing = true
+        preventingException = true
         
-        delegate?.caseContainer?(
+        delegate?.caseContainer(
             caseContainerViewController: self,
             index: Int(scrollViewStatus.currentIndex),
             scrollViewDidEndDecelerating: scrollView)

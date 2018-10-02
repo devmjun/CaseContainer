@@ -12,6 +12,7 @@ class LifeCycleTests: XCTestCase {
     
     var sut: DemoViewController!
     override func setUp() {
+        super.setUp()
         sut = DemoViewController()
         _ = sut.v
         sut.v.layoutIfNeeded()
@@ -21,7 +22,7 @@ class LifeCycleTests: XCTestCase {
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        sut = nil 
+        sut = nil
         super.tearDown()
     }
     
@@ -33,15 +34,16 @@ class LifeCycleTests: XCTestCase {
         }
         sut = nil
         UIApplication.shared.keyWindow?.rootViewController = nil
-        
-        wait(for: [expectation], timeout: 2)
+        XCTWaiter().wait(for: [expectation], timeout: 2)
     }
 }
 
 extension LifeCycleTests {
     class MockDemoViewController: DemoViewController {
         var calledDeinit: (() -> Void)?
-        deinit { calledDeinit?() }
+        deinit {
+            calledDeinit?()
+        }
     }
 }
 

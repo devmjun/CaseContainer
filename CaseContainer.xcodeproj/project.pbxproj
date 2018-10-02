@@ -18,10 +18,13 @@
 		040EFA1F215BCA670082E029 /* TestingFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EFA1E215BCA670082E029 /* TestingFrame.swift */; };
 		040EFA28215BCAA60082E029 /* TestingFrameWithTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EFA27215BCAA60082E029 /* TestingFrameWithTabBar.swift */; };
 		040EFA2A215BCAB10082E029 /* LifeCycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EFA29215BCAB10082E029 /* LifeCycleTests.swift */; };
+		04321DA7215F3B5100565864 /* OrdinaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04321DA6215F3B5100565864 /* OrdinaryViewController.swift */; };
+		0467BD2C2161F2310002C775 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD2B2161F2310002C775 /* StartViewController.swift */; };
+		0467BD6F2162826E0002C775 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD4F216280B00002C775 /* Then.swift */; };
 		04DBEE11215A279C009750F2 /* CaseContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04DBEE03215A279C009750F2 /* CaseContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04DBEE1F215A2A2B009750F2 /* CaseContainerBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */; };
 		04DBEE21215A2A33009750F2 /* CaseContainerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */; };
-		04DBEE23215A2A39009750F2 /* Appearence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE22215A2A39009750F2 /* Appearence.swift */; };
+		04DBEE23215A2A39009750F2 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE22215A2A39009750F2 /* Appearance.swift */; };
 		04DBEE25215A2A80009750F2 /* CaseContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE24215A2A80009750F2 /* CaseContainerView.swift */; };
 		04DBEE27215A2A8E009750F2 /* CaseContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE26215A2A8E009750F2 /* CaseContainerViewController.swift */; };
 		04DBEE29215A2A95009750F2 /* CaseContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE28215A2A95009750F2 /* CaseContainerDelegate.swift */; };
@@ -81,12 +84,15 @@
 		040EFA20215BCA670082E029 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		040EFA27215BCAA60082E029 /* TestingFrameWithTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingFrameWithTabBar.swift; sourceTree = "<group>"; };
 		040EFA29215BCAB10082E029 /* LifeCycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCycleTests.swift; sourceTree = "<group>"; };
+		04321DA6215F3B5100565864 /* OrdinaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdinaryViewController.swift; sourceTree = "<group>"; };
+		0467BD2B2161F2310002C775 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		0467BD4F216280B00002C775 /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		04DBEE00215A279C009750F2 /* CaseContainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaseContainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DBEE03215A279C009750F2 /* CaseContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaseContainer.h; sourceTree = "<group>"; };
 		04DBEE04215A279C009750F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerBaseView.swift; sourceTree = "<group>"; };
 		04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerBaseViewController.swift; sourceTree = "<group>"; };
-		04DBEE22215A2A39009750F2 /* Appearence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearence.swift; sourceTree = "<group>"; };
+		04DBEE22215A2A39009750F2 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		04DBEE24215A2A80009750F2 /* CaseContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerView.swift; sourceTree = "<group>"; };
 		04DBEE26215A2A8E009750F2 /* CaseContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerViewController.swift; sourceTree = "<group>"; };
 		04DBEE28215A2A95009750F2 /* CaseContainerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerDelegate.swift; sourceTree = "<group>"; };
@@ -131,8 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				040EF9FE215BC6BC0082E029 /* AppDelegate.swift */,
+				0467BD2B2161F2310002C775 /* StartViewController.swift */,
 				040EFA00215BC6BC0082E029 /* DemoViewController.swift */,
 				040EFA0F215BC7680082E029 /* ChildTableViewController.swift */,
+				04321DA6215F3B5100565864 /* OrdinaryViewController.swift */,
 				040EFA02215BC6BC0082E029 /* Main.storyboard */,
 				040EFA05215BC6BD0082E029 /* Assets.xcassets */,
 				040EFA07215BC6BD0082E029 /* LaunchScreen.storyboard */,
@@ -201,7 +209,7 @@
 			children = (
 				04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */,
 				04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */,
-				04DBEE22215A2A39009750F2 /* Appearence.swift */,
+				04DBEE22215A2A39009750F2 /* Appearance.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -223,6 +231,7 @@
 				04DBEE36215A2C47009750F2 /* UIScreen+bounds.swift */,
 				04DBEE38215A2C51009750F2 /* UIapplication+StatusBar.swift */,
 				04DBEE3A215A2C57009750F2 /* Array+index.swift */,
+				0467BD4F216280B00002C775 /* Then.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -380,9 +389,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0467BD2C2161F2310002C775 /* StartViewController.swift in Sources */,
 				040EFA01215BC6BC0082E029 /* DemoViewController.swift in Sources */,
 				040EF9FF215BC6BC0082E029 /* AppDelegate.swift in Sources */,
 				040EFA10215BC7680082E029 /* ChildTableViewController.swift in Sources */,
+				04321DA7215F3B5100565864 /* OrdinaryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,12 +411,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0467BD6F2162826E0002C775 /* Then.swift in Sources */,
 				04DBEE3B215A2C57009750F2 /* Array+index.swift in Sources */,
 				04DBEE2E215A2AE9009750F2 /* ParallaxTableViewController.swift in Sources */,
 				04DBEE39215A2C51009750F2 /* UIapplication+StatusBar.swift in Sources */,
 				04DBEE29215A2A95009750F2 /* CaseContainerDelegate.swift in Sources */,
 				04DBEE25215A2A80009750F2 /* CaseContainerView.swift in Sources */,
-				04DBEE23215A2A39009750F2 /* Appearence.swift in Sources */,
+				04DBEE23215A2A39009750F2 /* Appearance.swift in Sources */,
 				04DBEE27215A2A8E009750F2 /* CaseContainerViewController.swift in Sources */,
 				04DBEE1F215A2A2B009750F2 /* CaseContainerBaseView.swift in Sources */,
 				04DBEE33215A2BE7009750F2 /* UIView+AddSubView.swift in Sources */,
@@ -500,7 +512,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E8CS7J8RX4;
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -521,7 +533,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E8CS7J8RX4;
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -672,6 +684,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Sources/Assets/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -699,6 +712,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Sources/Assets/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

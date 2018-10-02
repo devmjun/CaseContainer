@@ -9,11 +9,19 @@
 import UIKit
 
 open class TabScrollView: UIScrollView {
+    public enum Status {
+        case normal
+        case largeThenScreen
+    }
+    
+    open private(set) var status: Status = .normal
+    
     open var _horizontalCanvas = UIView()
-    var indicator: UIView = {
+    var indicator: UIView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        return $0
-    }(UIView(frame: CGRect.zero))
+    }
+
+    
     
     public var buttonsRect = Array<CGRect>()
     open private(set) var buttons = Array<TabButton>()
@@ -36,7 +44,6 @@ open class TabScrollView: UIScrollView {
         backgroundColor = .white
     }
     
-    
     // 2
     func setupBinding(
         parent vc: CaseContainerViewController,
@@ -46,6 +53,8 @@ open class TabScrollView: UIScrollView {
             let buttonsWholeWidth = buttonsWidth.reduce(0, +)
             let eachRatio = buttonsWidth.map { $0 / buttonsWholeWidth }
             buttonsWidth = eachRatio.map { $0 * UIScreen.mainWidth }
+        }else {
+            status = .largeThenScreen
         }
         
         for item in 0..<vc.viewContorllers.count {
@@ -54,7 +63,7 @@ open class TabScrollView: UIScrollView {
                 width: buttonsWidth[item], height: ui.tabScrollViewHeight)
             buttonsRect.append(rect)
         }
-//
+
         contentSize = CGSize(
             width: buttonsWidth.reduce(0, +),
             height: ui.tabScrollViewHeight)
@@ -98,13 +107,22 @@ open class TabScrollView: UIScrollView {
             btn.highLightedColor = tabBarColor.highLight
             btn.status = i == 0 ? .on : .off
             btn.addTarget(vc, action: #selector(vc.tabButtonAction(_:)), for: .touchUpInside)
-            btn.layer.borderColor = UIColor.black.cgColor
-            btn.layer.borderWidth = 0.5
             _horizontalCanvas.addSubview(btn)
             buttons.append(btn)
         }
         
         indicator.backgroundColor = indicatorColor
+    }
+    
+    public func reload(_ index: Int) {
+        guard index < self.buttonsRect.count else { return }
+        let buttonRect = buttonsRect[index]
+        let limitingValue = contentSize.width - UIScreen.mainWidth
+        let convertOffsetX = (buttonRect.minX / 2 >= limitingValue) ? limitingValue : buttonRect.minX / 2
+        
+        indicator.layer.frame.origin.x = buttonRect.minX
+        indicator.layer.frame.size.width = buttonRect.width
+        contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
     }
     
     public func scrollingSynchronization(
@@ -134,8 +152,12 @@ open class TabScrollView: UIScrollView {
         let destination = UIScreen.mainWidth * CGFloat(index + 1)
         let convertOriginX = originX - (destination - contentScrollViewOriginX) * ratio
         
-        indicator.frame.origin.x = convertOriginX
-        contentOffset.x = convertOriginX / 2
+        let limitingValue = contentSize.width - UIScreen.mainWidth
+        let convertOffsetX = (convertOriginX / 2 >= limitingValue) ? limitingValue : convertOriginX / 2
+        
+        
+        indicator.layer.frame.origin.x = convertOriginX
+        contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
         
         let prevButtonWidth = buttonsRect[index].width
         let currentButtonWidth = buttonsRect[index+1].width
@@ -147,13 +169,13 @@ open class TabScrollView: UIScrollView {
             if currentButtonWidth > prevButtonWidth {
                 let decreaseValue = (currentButtonWidth - prevButtonWidth) * progress
                 let newConvertWidth = currentButtonWidth - decreaseValue
-                indicator.frame.size.width = newConvertWidth
+                indicator.layer.frame.size.width = newConvertWidth
             }
             
             // If the current button's width is smaller than the previous button's width
         }else {
             if convertWidth >= currentButtonWidth {
-                indicator.frame.size.width = convertWidth
+                indicator.layer.frame.size.width = convertWidth
             }
         }
     }
@@ -173,8 +195,11 @@ open class TabScrollView: UIScrollView {
         let destination = UIScreen.mainWidth * CGFloat(index)
         let convertOriginX = (contentScrollViewOriginX - destination) * ratio + originX
         
-        indicator.frame.origin.x = convertOriginX
-        contentOffset.x = convertOriginX / 2
+        let limitingValue = contentSize.width - UIScreen.mainWidth
+        let convertOffsetX = (convertOriginX / 2 >= limitingValue) ? limitingValue : convertOriginX / 2
+        
+        indicator.layer.frame.origin.x = convertOriginX
+        contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
         
         // Synchronize indicator's width
         let nextButtonWidth = buttonsRect[index].width
@@ -188,14 +213,14 @@ open class TabScrollView: UIScrollView {
             if currentButtonWidth > nextButtonWidth {
                 let decreaseValue = (currentButtonWidth - nextButtonWidth) * progress
                 let newConvertWidth = currentButtonWidth - decreaseValue
-                indicator.frame.size.width = newConvertWidth
+                indicator.layer.frame.size.width = newConvertWidth
             }
             
             // If the current button's width is smaller then next button's width
             // Start resizing from the 'point' where the button's width you want to change is smaller than the current button's width
         }else {
             if convertWidth >= currentButtonWidth {
-                indicator.frame.size.width = convertWidth
+                indicator.layer.frame.size.width = convertWidth
             }
         }
     }

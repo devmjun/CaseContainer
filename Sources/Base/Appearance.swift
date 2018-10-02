@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct Appearence {
+public struct Appearance {
     public let headerHeight: CGFloat
     public let tabScrollHegiht: CGFloat
     public let indicatorColor: UIColor
