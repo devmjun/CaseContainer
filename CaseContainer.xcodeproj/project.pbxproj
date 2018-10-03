@@ -21,6 +21,7 @@
 		04321DA7215F3B5100565864 /* OrdinaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04321DA6215F3B5100565864 /* OrdinaryViewController.swift */; };
 		0467BD2C2161F2310002C775 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD2B2161F2310002C775 /* StartViewController.swift */; };
 		0467BD6F2162826E0002C775 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD4F216280B00002C775 /* Then.swift */; };
+		0467BDD9216485A60002C775 /* FrameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BDD8216485A60002C775 /* FrameTests.swift */; };
 		04DBEE11215A279C009750F2 /* CaseContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04DBEE03215A279C009750F2 /* CaseContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04DBEE1F215A2A2B009750F2 /* CaseContainerBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */; };
 		04DBEE21215A2A33009750F2 /* CaseContainerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */; };
@@ -87,6 +88,7 @@
 		04321DA6215F3B5100565864 /* OrdinaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdinaryViewController.swift; sourceTree = "<group>"; };
 		0467BD2B2161F2310002C775 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		0467BD4F216280B00002C775 /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
+		0467BDD8216485A60002C775 /* FrameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTests.swift; sourceTree = "<group>"; };
 		04DBEE00215A279C009750F2 /* CaseContainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaseContainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DBEE03215A279C009750F2 /* CaseContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaseContainer.h; sourceTree = "<group>"; };
 		04DBEE04215A279C009750F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				040EFA1E215BCA670082E029 /* TestingFrame.swift */,
 				040EFA27215BCAA60082E029 /* TestingFrameWithTabBar.swift */,
 				040EFA29215BCAB10082E029 /* LifeCycleTests.swift */,
+				0467BDD8216485A60002C775 /* FrameTests.swift */,
 				040EFA20215BCA670082E029 /* Info.plist */,
 			);
 			path = Tests;
@@ -402,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				040EFA28215BCAA60082E029 /* TestingFrameWithTabBar.swift in Sources */,
+				0467BDD9216485A60002C775 /* FrameTests.swift in Sources */,
 				040EFA1F215BCA670082E029 /* TestingFrame.swift in Sources */,
 				040EFA2A215BCAB10082E029 /* LifeCycleTests.swift in Sources */,
 			);

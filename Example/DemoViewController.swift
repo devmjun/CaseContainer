@@ -41,13 +41,13 @@ class DemoViewController: CaseContainerViewController {
         
         view.addSubview(dismissButton)
         dismissButton.bringSubviewToFront(containerScrollView)
-        
-        imageView = UIImageView(image: UIImage(named: "swiss.jpg"))
-        if let imageView = imageView {
-            headerView.addSubview(imageView)
-            imageView.frame = CGRect(x: 0, y: 0,
-                                     width: UIScreen.mainWidth, height: appearence.headerHeight)
-        }
+//        
+//        imageView = UIImageView(image: UIImage(named: "swiss.jpg"))
+//        if let imageView = imageView {
+//            headerView.addSubview(imageView)
+//            imageView.frame = CGRect(x: 0, y: 0,
+//                                     width: UIScreen.mainWidth, height: appearence.headerHeight)
+//        }
     }
     
     required init() {
@@ -55,23 +55,23 @@ class DemoViewController: CaseContainerViewController {
         // 1
         let childViewController1 = ChildTableViewController()
         childViewController1.title = "First Tab"
-        childViewController1.delegate = self
+//        childViewController1.delegate = self
 
         let childViewController2 = ChildTableViewController()
         childViewController2.title = "Second Tab"
-        childViewController2.delegate = self
+//        childViewController2.delegate = self
 
         let childViewController3 = ChildTableViewController()
         childViewController3.title = "Third Tab"
-        childViewController3.delegate = self
+//        childViewController3.delegate = self
         
         let childViewController4 = ChildTableViewController()
         childViewController4.title = "Fourth Tab"
-        childViewController4.delegate = self
+//        childViewController4.delegate = self
         
         let childViewController5 = ChildTableViewController()
         childViewController5.title = "Fifth Tab"
-        childViewController5.delegate = self
+//        childViewController5.delegate = self
 
         let childViewController6 = OrdinaryViewController()
         childViewController6.title = "Sixth Tab"

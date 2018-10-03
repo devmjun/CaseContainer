@@ -10,7 +10,7 @@ import UIKit
 
 open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController> {
     public private(set) var containerScrollView = UIScrollView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .red
         $0.showsHorizontalScrollIndicator = false
         $0.showsVerticalScrollIndicator = false
         /// was specified unidirection Scrolling, this direction of scrollView is vertical
@@ -27,18 +27,14 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
      This property is containerScrollView's contentView
      */
     lazy public private(set) var verticalCanvasView = UIView().then {
-        $0.backgroundColor = .white
-    }
-    
-    public var headerView: UIView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .brown
     }
     
     public var tabScrollView = TabScrollView()
     
     public var contentsScrollView = UIScrollView().then {
-        $0.bounces = false
-        $0.backgroundColor = .white
+        $0.bounces = true
+        $0.backgroundColor = .purple
         $0.isDirectionalLockEnabled = true
         $0.showsVerticalScrollIndicator = false
         $0.isPagingEnabled = true
@@ -53,7 +49,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             width: ui.contentsScrollViewContentSize.width,
             height: ui.contentsScrollViewContentSize.height)
         $0.frame = rect
-        $0.backgroundColor = .white
+        $0.backgroundColor = .blue
     }
     
     public var tabBarHeight: CGFloat {
@@ -72,21 +68,18 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
     }
     
     struct UI {
-        var headerViewHeight: CGFloat
         var tabScrollViewHeight: CGFloat
         var contentsScrollViewFrameSize: CGSize
         var contentsScrollViewContentSize: CGSize
         var containerScrollViewContentSize: CGSize
         
         init(containerViewController: CaseContainerViewController,
-             headerHeight: CGFloat,
              tabScrollHeaight: CGFloat,
              tabBarHeight: CGFloat) {
             guard containerViewController.viewContorllers.count > 0  else {
                 fatalError("you must Implement ChildViewController")
             }
             let numberOfChildVierControlelr: CGFloat = CGFloat(containerViewController.viewContorllers.count)
-            headerViewHeight = headerHeight
             tabScrollViewHeight = tabScrollHeaight
             
             contentsScrollViewFrameSize = CGSize(
@@ -95,18 +88,17 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             
             contentsScrollViewContentSize = CGSize(
                 width: UIScreen.mainWidth * numberOfChildVierControlelr,
-                height: contentsScrollViewFrameSize.height)
+                height: UIScreen.mainHeight - UIApplication.statusBarHeight )
             
             containerScrollViewContentSize = CGSize(
                 width: UIScreen.mainWidth,
-                height: headerViewHeight + tabScrollViewHeight + contentsScrollViewFrameSize.height)
+                height: tabScrollViewHeight + contentsScrollViewFrameSize.height)
             
         }
     }
     
     lazy var ui = UI(
         containerViewController: vc,
-        headerHeight: vc.appearence.headerHeight,
         tabScrollHeaight: vc.appearence.tabScrollHegiht,
         tabBarHeight: tabBarHeight)
     
@@ -128,7 +120,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         addSubviews([containerScrollView])
         containerScrollView.addSubview(verticalCanvasView)
         contentsScrollView.addSubview(horizonCanvasView)
-        verticalCanvasView.addSubviews([headerView, tabScrollView, contentsScrollView])
+        verticalCanvasView.addSubviews([tabScrollView, contentsScrollView])
         
         containerScrollView
             .topAnchor(to: layoutMarginsGuide.topAnchor)
@@ -142,18 +134,12 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             .bottomAnchor(to: containerScrollView.bottomAnchor)
             .leadingAnchor(to: containerScrollView.leadingAnchor)
             .trailingAnchor(to: containerScrollView.trailingAnchor)
+            
             .dimensionAnchors(size: ui.containerScrollViewContentSize)
             .activateAnchors()
         
-        headerView
-            .topAnchor(to: verticalCanvasView.topAnchor)
-            .leadingAnchor(to: verticalCanvasView.leadingAnchor)
-            .trailingAnchor(to: verticalCanvasView.trailingAnchor)
-            .heightAnchor(constant: ui.headerViewHeight)
-            .activateAnchors()
-        
         tabScrollView
-            .topAnchor(to: headerView.bottomAnchor)
+            .topAnchor(to: verticalCanvasView.topAnchor)
             .leadingAnchor(to: verticalCanvasView.leadingAnchor)
             .trailingAnchor(to: verticalCanvasView.trailingAnchor)
             .heightAnchor(constant: ui.tabScrollViewHeight)
@@ -202,15 +188,9 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         horizonCanvasView.addSubview(initialChildVC.view)
         
         // 3. determine child View Controller`s view frame
-        if initialChildVC is ParallaxTableViewController {
-            initialChildVC.view.frame = CGRect(x: 0, y: 0, width: ui.contentsScrollViewFrameSize.width, height: ui.contentsScrollViewContentSize.height)
-        }else {
-        // if it is not ParallaxTableViewController
-            let vaildViewHeight = UIScreen.mainHeight - UIApplication.statusBarHeight
-            let scaleRatio = ui.contentsScrollViewContentSize.height / vaildViewHeight
-            initialChildVC.view.transform = CGAffineTransform(scaleX: 1.0, y: scaleRatio)
-            initialChildVC.view.frame.origin = CGPoint.zero
-        }
+        initialChildVC.view.frame = CGRect(x: 0, y: 0,
+                                           width: ui.contentsScrollViewFrameSize.width,
+                                           height: ui.contentsScrollViewContentSize.height)
         
         initialChildVC.didMove(toParent: vc)
     }

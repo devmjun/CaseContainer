@@ -20,7 +20,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
     lazy open private(set) var v = CaseContainerView(controllBy: self)
     weak open var delegate: CaseContainerDelegate?
     
-    open weak var headerView: UIView! { return v.headerView }
+    
     open weak var tabScrollView: TabScrollView! { return v.tabScrollView }
     open weak var contentsScrollView: UIScrollView! { return v.contentsScrollView }
     open weak var containerScrollView: UIScrollView! { return v.containerScrollView }
@@ -90,19 +90,11 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
             if let childVC = viewContorllers.at(index) {
                 addChild(childVC)
                 v.horizonCanvasView.addSubview(childVC.view)
-                
-                if childVC is ParallaxTableViewController {
-                    let indexWidth: CGFloat = v.ui.contentsScrollViewFrameSize.width
-                    let rect = CGRect(
-                        x: indexWidth * CGFloat(index), y: 0,
-                        width: indexWidth, height: v.ui.contentsScrollViewContentSize.height)
-                    childVC.view.frame = rect
-                }else {
-                    let vaildViewHeight = UIScreen.mainHeight - UIApplication.statusBarHeight
-                    let scaleRatio = v.ui.contentsScrollViewContentSize.height / vaildViewHeight
-                    childVC.view.transform = CGAffineTransform(scaleX: 1.0, y: scaleRatio)
-                    childVC.view.frame.origin = CGPoint(x: v.ui.contentsScrollViewFrameSize.width * CGFloat(index), y: 0)
-                }
+                let indexWidth: CGFloat = v.ui.contentsScrollViewFrameSize.width
+                let rect = CGRect(
+                    x: indexWidth * CGFloat(index), y: 0,
+                    width: indexWidth, height: v.ui.contentsScrollViewContentSize.height)
+                childVC.view.frame = rect
                 
                 childVC.didMove(toParent: self)
                 childVC.beginAppearanceTransition(true, animated: true)
@@ -252,22 +244,23 @@ extension CaseContainerViewController: UIScrollViewDelegate {
                     scrollViewStatus.startDraggingOffsetX = ceil(scrollView.contentOffset.x)
                 }
             }
-        }else if scrollView === containerScrollView {
-            let maxiumOffsetY = v.headerView.frame.height
-            let progress = containerScrollView.contentOffset.y / maxiumOffsetY
-            
-            // temporarily...
-            // To synchronize the contentOffset of the child view controller, contentOffset of the container ScrollView
-            if progress == 0 {
-                viewContorllers.forEach {
-                    if $0 is ParallaxTableViewController {
-                        ($0 as? ParallaxTableViewController)?.tableView.contentOffset = CGPoint.zero
-                    }
-                }
-            }
-            delegate?.caseContainer(parallaxHeader: progress)
-            
         }
+//        else if scrollView === containerScrollView {
+//            let maxiumOffsetY = v.headerView.frame.height
+//            let progress = containerScrollView.contentOffset.y / maxiumOffsetY
+//            
+//            // temporarily...
+//            // To synchronize the contentOffset of the child view controller, contentOffset of the container ScrollView
+//            if progress == 0 {
+//                viewContorllers.forEach {
+//                    if $0 is ParallaxTableViewController {
+//                        ($0 as? ParallaxTableViewController)?.tableView.contentOffset = CGPoint.zero
+//                    }
+//                }
+//            }
+//            delegate?.caseContainer(parallaxHeader: progress)
+//            
+//        }
     }
     
     open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
