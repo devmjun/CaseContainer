@@ -22,6 +22,7 @@
 		0467BD2C2161F2310002C775 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD2B2161F2310002C775 /* StartViewController.swift */; };
 		0467BD6F2162826E0002C775 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD4F216280B00002C775 /* Then.swift */; };
 		0467BDFA2164F2300002C775 /* ChildCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BDF92164F2300002C775 /* ChildCollectionViewController.swift */; };
+		0467BDFC2164F59B0002C775 /* ParallaxCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BDFB2164F59B0002C775 /* ParallaxCollectionViewController.swift */; };
 		04DBEE11215A279C009750F2 /* CaseContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04DBEE03215A279C009750F2 /* CaseContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04DBEE1F215A2A2B009750F2 /* CaseContainerBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */; };
 		04DBEE21215A2A33009750F2 /* CaseContainerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */; };
@@ -29,7 +30,7 @@
 		04DBEE25215A2A80009750F2 /* CaseContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE24215A2A80009750F2 /* CaseContainerView.swift */; };
 		04DBEE27215A2A8E009750F2 /* CaseContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE26215A2A8E009750F2 /* CaseContainerViewController.swift */; };
 		04DBEE29215A2A95009750F2 /* CaseContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE28215A2A95009750F2 /* CaseContainerDelegate.swift */; };
-		04DBEE2C215A2AD5009750F2 /* ParallaxTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE2B215A2AD5009750F2 /* ParallaxTableViewDelegate.swift */; };
+		04DBEE2C215A2AD5009750F2 /* ParallaxViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE2B215A2AD5009750F2 /* ParallaxViewDelegate.swift */; };
 		04DBEE2E215A2AE9009750F2 /* ParallaxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE2D215A2AE9009750F2 /* ParallaxTableViewController.swift */; };
 		04DBEE31215A2BD1009750F2 /* UIView+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE30215A2BD1009750F2 /* UIView+Anchor.swift */; };
 		04DBEE33215A2BE7009750F2 /* UIView+AddSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE32215A2BE7009750F2 /* UIView+AddSubView.swift */; };
@@ -89,6 +90,7 @@
 		0467BD2B2161F2310002C775 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		0467BD4F216280B00002C775 /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		0467BDF92164F2300002C775 /* ChildCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCollectionViewController.swift; sourceTree = "<group>"; };
+		0467BDFB2164F59B0002C775 /* ParallaxCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxCollectionViewController.swift; sourceTree = "<group>"; };
 		04DBEE00215A279C009750F2 /* CaseContainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaseContainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DBEE03215A279C009750F2 /* CaseContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaseContainer.h; sourceTree = "<group>"; };
 		04DBEE04215A279C009750F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,7 +100,7 @@
 		04DBEE24215A2A80009750F2 /* CaseContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerView.swift; sourceTree = "<group>"; };
 		04DBEE26215A2A8E009750F2 /* CaseContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerViewController.swift; sourceTree = "<group>"; };
 		04DBEE28215A2A95009750F2 /* CaseContainerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseContainerDelegate.swift; sourceTree = "<group>"; };
-		04DBEE2B215A2AD5009750F2 /* ParallaxTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxTableViewDelegate.swift; sourceTree = "<group>"; };
+		04DBEE2B215A2AD5009750F2 /* ParallaxViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxViewDelegate.swift; sourceTree = "<group>"; };
 		04DBEE2D215A2AE9009750F2 /* ParallaxTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxTableViewController.swift; sourceTree = "<group>"; };
 		04DBEE30215A2BD1009750F2 /* UIView+Anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchor.swift"; sourceTree = "<group>"; };
 		04DBEE32215A2BE7009750F2 /* UIView+AddSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubView.swift"; sourceTree = "<group>"; };
@@ -220,8 +222,9 @@
 		04DBEE2A215A2AC4009750F2 /* ParallaxDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				04DBEE2B215A2AD5009750F2 /* ParallaxTableViewDelegate.swift */,
+				04DBEE2B215A2AD5009750F2 /* ParallaxViewDelegate.swift */,
 				04DBEE2D215A2AE9009750F2 /* ParallaxTableViewController.swift */,
+				0467BDFB2164F59B0002C775 /* ParallaxCollectionViewController.swift */,
 			);
 			path = ParallaxDelegate;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				040EF9FF215BC6BC0082E029 /* AppDelegate.swift in Sources */,
 				040EFA10215BC7680082E029 /* ChildTableViewController.swift in Sources */,
 				04321DA7215F3B5100565864 /* OrdinaryViewController.swift in Sources */,
+				0467BDFC2164F59B0002C775 /* ParallaxCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,7 +433,7 @@
 				04DBEE37215A2C47009750F2 /* UIScreen+bounds.swift in Sources */,
 				04DBEE21215A2A33009750F2 /* CaseContainerBaseViewController.swift in Sources */,
 				04DBEE40215A2C99009750F2 /* TabButton.swift in Sources */,
-				04DBEE2C215A2AD5009750F2 /* ParallaxTableViewDelegate.swift in Sources */,
+				04DBEE2C215A2AD5009750F2 /* ParallaxViewDelegate.swift in Sources */,
 				04DBEE31215A2BD1009750F2 /* UIView+Anchor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
