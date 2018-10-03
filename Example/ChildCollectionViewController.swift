@@ -15,6 +15,7 @@ class ChildCollectionViewContorller: ParallaxCollectionViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.backgroundColor = .white 
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

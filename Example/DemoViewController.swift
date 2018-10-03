@@ -24,11 +24,6 @@ class DemoViewController: CaseContainerViewController {
     
     var imageView: UIImageView?
     
-    override func loadView() {
-        super.loadView()
-        
-        
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
@@ -57,11 +52,11 @@ class DemoViewController: CaseContainerViewController {
         childViewController1.title = "First Tab"
         childViewController1.delegate = self
 
-        let childViewController2 = ChildTableViewController()
+        let childViewController2 = ChildCollectionViewContorller(collectionViewLayout: UICollectionViewFlowLayout())
         childViewController2.title = "Second Tab"
         childViewController2.delegate = self
 
-        let childViewController3 = ChildCollectionViewContorller(collectionViewLayout: UICollectionViewFlowLayout())
+        let childViewController3 = ChildTableViewController()
         childViewController3.title = "Third Tab"
         childViewController3.delegate = self
         
@@ -107,9 +102,6 @@ class DemoViewController: CaseContainerViewController {
     }
     
     deinit { print("Called \(#function) at \(self)") }
-    
-    
-    
 }
 
 extension DemoViewController: CaseContainerDelegate {
