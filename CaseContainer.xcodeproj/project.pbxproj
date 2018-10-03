@@ -22,7 +22,7 @@
 		0467BD2C2161F2310002C775 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD2B2161F2310002C775 /* StartViewController.swift */; };
 		0467BD6F2162826E0002C775 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD4F216280B00002C775 /* Then.swift */; };
 		0467BDFA2164F2300002C775 /* ChildCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BDF92164F2300002C775 /* ChildCollectionViewController.swift */; };
-		0467BDFC2164F59B0002C775 /* ParallaxCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BDFB2164F59B0002C775 /* ParallaxCollectionViewController.swift */; };
+		0467BDFD2164F5FF0002C775 /* ParallaxCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BDFB2164F59B0002C775 /* ParallaxCollectionViewController.swift */; };
 		04DBEE11215A279C009750F2 /* CaseContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04DBEE03215A279C009750F2 /* CaseContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04DBEE1F215A2A2B009750F2 /* CaseContainerBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */; };
 		04DBEE21215A2A33009750F2 /* CaseContainerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */; };
@@ -401,7 +401,6 @@
 				040EF9FF215BC6BC0082E029 /* AppDelegate.swift in Sources */,
 				040EFA10215BC7680082E029 /* ChildTableViewController.swift in Sources */,
 				04321DA7215F3B5100565864 /* OrdinaryViewController.swift in Sources */,
-				0467BDFC2164F59B0002C775 /* ParallaxCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0467BDFD2164F5FF0002C775 /* ParallaxCollectionViewController.swift in Sources */,
 				0467BD6F2162826E0002C775 /* Then.swift in Sources */,
 				04DBEE3B215A2C57009750F2 /* Array+index.swift in Sources */,
 				04DBEE2E215A2AE9009750F2 /* ParallaxTableViewController.swift in Sources */,
