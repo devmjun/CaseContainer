@@ -41,7 +41,7 @@ And run `carthage update`.
 
 ## Usage
 
-1. Create an instance of a `ParallaxTableViewController` or `YourSomeViewController`
+1. Create an instance of a `ParallaxTableViewController`, `ParallaxCollectionViewController` or `YourSomeViewController`
 
 ```swift
 import CaseContainer
@@ -49,6 +49,10 @@ import CaseContainer
 // 1
 class YourChildTableViewController: ParallaxTableViewController {
 }
+
+class YourChildTableViewController: ParallaxCollectionViewController {
+}
+
 // or 1
 class YourSomeViewController: UIViewController {
 }
