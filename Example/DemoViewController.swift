@@ -61,11 +61,11 @@ class DemoViewController: CaseContainerViewController {
         childViewController2.title = "Second Tab"
         childViewController2.delegate = self
 
-        let childViewController3 = ChildTableViewController()
+        let childViewController3 = ChildCollectionViewContorller(collectionViewLayout: UICollectionViewFlowLayout())
         childViewController3.title = "Third Tab"
         childViewController3.delegate = self
         
-        let childViewController4 = ChildTableViewController()
+        let childViewController4 = ChildCollectionViewContorller(collectionViewLayout: UICollectionViewFlowLayout())
         childViewController4.title = "Fourth Tab"
         childViewController4.delegate = self
         
