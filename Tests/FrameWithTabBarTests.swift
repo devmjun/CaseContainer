@@ -8,7 +8,7 @@
 
 import XCTest
 @testable import Example 
-class TestingFrameWithTabBar: XCTestCase {
+class FrameWithTabBarTests: XCTestCase {
     
     var sut: DemoViewController!
     var tabBarHeight: CGFloat!

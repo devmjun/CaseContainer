@@ -9,7 +9,7 @@
 import XCTest
 @testable import Example
 
-class TestingFrame: XCTestCase {
+class FrameTests: XCTestCase {
     
     var sut: DemoViewController!
     var statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
