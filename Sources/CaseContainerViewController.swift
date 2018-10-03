@@ -8,7 +8,15 @@
 
 import UIKit
 
+public enum Direction {
+    case left
+    case right
+    case up
+    case down
+}
+
 open class CaseContainerViewController: CaseContainerBaseViewController {
+    
     lazy open private(set) var v = CaseContainerView(controllBy: self)
     weak open var delegate: CaseContainerDelegate?
     
@@ -49,7 +57,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
             scrollViewStatus.currentIndex = CGFloat(index)
             buttonHighlight(index)
             buttonDehighlightWithout(index)
-            removeWithout(index)
+            removeAllWithout(index)
             goTo(index)
             
             delegate?.caseContainer(
@@ -106,7 +114,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
     /**
      this mothod delete All of the current ChildViewControllers with excepting of ChildViewController at `index`
      */
-    open func removeWithout(_ index: Int?) {
+    open func removeAllWithout(_ index: Int?) {
         children
             .forEach { [weak self] (childVC: UIViewController) in
                 guard let strongSelf = self else { return }
@@ -197,7 +205,8 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         let direction = scrollView.panGestureRecognizer.translation(in: scrollView.superview).x
         let offsetX = scrollView.contentOffset.x
         
-        if scrollView === v.contentsScrollView && direction > 0 || direction < 0 && scrollView !== v.tabScrollView { /* explicitly, Call the scrollview because it uses a nested scrollView */
+        if scrollView === v.contentsScrollView && direction > 0 ||
+            direction < 0 && scrollView !== v.tabScrollView { /* explicitly, Call the scrollview because it uses a nested scrollView */
             // Switch Index when more than 50% of the previous/next page is visible
             scrollViewStatus.currentIndex = floor( (offsetX - contentsWidth / 2) / contentsWidth ) + 1
             scrollViewStatus.originIndex = floor( (offsetX - contentsWidth) / contentsWidth ) + 1
@@ -205,22 +214,28 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             if let _startDraggingOffsetX = scrollViewStatus.startDraggingOffsetX,
                 let presentedChildVC = children.first {
                 
-                let scrollingToward = _startDraggingOffsetX > offsetX /* true is going to nextPage, false is going to previous Page */
+                let forward = _startDraggingOffsetX < offsetX /* true is going to nextPage, false is going to previous Page */
                 let percent = (offsetX - _startDraggingOffsetX) / scrollView.bounds.width * 1.1
-                let percentComplete = scrollingToward == false ? percent : (1.0 - percent) - 1.0
+                let percentComplete = forward == false ? (1.0 - percent) - 1.0 : percent
                 let _percentComplete =  min(1.0, percentComplete)
                 
-                if let index = scrollingToward ? prevIndex(n: viewControllerIndex(presentedChildVC)) : nextIndex(n: viewControllerIndex(presentedChildVC)),
+                if let index = forward ? nextIndex(n: viewControllerIndex(presentedChildVC)): prevIndex(n: viewControllerIndex(presentedChildVC)) ,
                     index < viewContorllers.count && index > -1 {
-                    // true if scrolling to the next, false if scrolling to the previous
-                    if scrollingToward {
-                        v.tabScrollView.scrollingSynchronization(
-                            prevIndex: index, nextIndex: nil,
-                            progress: _percentComplete, scrollView: scrollView)
-                    }else {
-                        v.tabScrollView.scrollingSynchronization(
-                            prevIndex: nil, nextIndex: index,
-                            progress: _percentComplete, scrollView: scrollView)
+                    
+                    let direction: Direction = forward ? .right : .left
+                    switch direction {
+                    case .left:
+                        v.tabScrollView.scrollingLeft(
+                            index: index,
+                            progress: _percentComplete,
+                            scrollView: scrollView)
+                    case .right:
+                        v.tabScrollView.scrollingRight(
+                            index: index,
+                            progress: _percentComplete,
+                            scrollView: scrollView)
+                    case .up: break
+                    case .down: break
                     }
                     
                     delegate?.caseContainer(
@@ -283,7 +298,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             buttonDehighlightWithout(currentIndex)
             
             // 4. Delete all ChildViewControllers Without the current index's viewController
-            removeWithout(currentIndex)
+            removeAllWithout(currentIndex)
             
             // exception
             if children.count == 0 {

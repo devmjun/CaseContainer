@@ -16,10 +16,14 @@ extension CaseContainerViewController: ParallaxTableViewDelegate {
     /// scrolling top and bottom is synchronized
     public func scrollViewDidScroll(scrollView: UIScrollView, tableView: UITableView) {
         let scrollingUp: Bool = scrollView.panGestureRecognizer.translation(in: scrollView).y < 0
+        let direction: Direction = scrollingUp ? .up : .down
         var childScrollingDownDueToParent = false
         let maxiumParallaxY = headerView.frame.height
         
-        if scrollingUp {
+        switch direction {
+        case .left: fallthrough
+        case .right: fallthrough
+        case .up:
             if scrollView == tableView {
                 if v.containerScrollView.contentOffset.y < maxiumParallaxY && !childScrollingDownDueToParent {
                     let offsetY = max(min(v.containerScrollView.contentOffset.y + tableView.contentOffset.y, maxiumParallaxY), 0)
@@ -28,7 +32,8 @@ extension CaseContainerViewController: ParallaxTableViewDelegate {
                     v.headerView.frame.origin.y = offsetY * 0.5
                 }
             }
-        } else {
+            
+        case .down:
             if scrollView == tableView {
                 if tableView.contentOffset.y < 0 && v.containerScrollView.contentOffset.y > 0 {
                     let offsetY = max(v.containerScrollView.contentOffset.y - abs(tableView.contentOffset.y), 0)
@@ -44,7 +49,6 @@ extension CaseContainerViewController: ParallaxTableViewDelegate {
                     tableView.contentOffset.y = offsetY
                     v.contentsScrollView.contentOffset.y = maxiumParallaxY
                     childScrollingDownDueToParent = false
-                    
                     v.headerView.frame.origin.y = offsetY * 0.5
                 }
             }

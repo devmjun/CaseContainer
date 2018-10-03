@@ -125,19 +125,6 @@ open class TabScrollView: UIScrollView {
         contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
     }
     
-    public func scrollingSynchronization(
-        prevIndex: Int?, nextIndex: Int?,
-        progress: CGFloat, scrollView: UIScrollView) {
-        guard !(prevIndex == nil && nextIndex == nil) else { return }
-        
-        if let prev = prevIndex {
-            scrollingLeft(index: prev, progress: progress, scrollView: scrollView)
-        }
-        if let next = nextIndex {
-            scrollingRight(index: next, progress: progress, scrollView: scrollView)
-        }
-    }
-    
     /**
      This method synchorized ContentsScrollView's Contents Offset and TabScrollView's indicator's Position and Width
      
@@ -145,7 +132,7 @@ open class TabScrollView: UIScrollView {
      - Parameter progress: scrolling percent
      - Parameter scrollView: Contents ScrollView
      */
-    private func scrollingLeft(index: Int, progress: CGFloat, scrollView: UIScrollView) {
+    public func scrollingLeft(index: Int, progress: CGFloat, scrollView: UIScrollView) {
         let contentScrollViewOriginX = scrollView.contentOffset.x
         let ratio = buttonsRect[index].width / UIScreen.mainWidth
         let originX = buttonsRect[index+1].origin.x
@@ -154,7 +141,6 @@ open class TabScrollView: UIScrollView {
         
         let limitingValue = contentSize.width - UIScreen.mainWidth
         let convertOffsetX = (convertOriginX / 2 >= limitingValue) ? limitingValue : convertOriginX / 2
-        
         
         indicator.layer.frame.origin.x = convertOriginX
         contentOffset.x = status == .largeThenScreen ? convertOffsetX : 0
@@ -187,7 +173,7 @@ open class TabScrollView: UIScrollView {
      - Parameter progress: scrolling percent
      - Parameter scrollView: Contents ScrollView
      */
-    private func scrollingRight(index: Int, progress: CGFloat, scrollView: UIScrollView) {
+    public func scrollingRight(index: Int, progress: CGFloat, scrollView: UIScrollView) {
         // synchronize indicator's origin.x
         let contentScrollViewOriginX = scrollView.contentOffset.x
         let ratio = buttonsRect[index-1].width / UIScreen.mainWidth
