@@ -202,7 +202,8 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         horizonCanvasView.addSubview(initialChildVC.view)
         
         // 3. determine child View Controller`s view frame
-        if initialChildVC is ParallaxTableViewController {
+        if initialChildVC is ParallaxTableViewController ||
+            initialChildVC is ParallaxCollectionViewController {
             initialChildVC.view.frame = CGRect(x: 0, y: 0, width: ui.contentsScrollViewFrameSize.width, height: ui.contentsScrollViewContentSize.height)
         }else {
         // if it is not ParallaxTableViewController
@@ -211,7 +212,6 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             initialChildVC.view.transform = CGAffineTransform(scaleX: 1.0, y: scaleRatio)
             initialChildVC.view.frame.origin = CGPoint.zero
         }
-        
         initialChildVC.didMove(toParent: vc)
     }
 }

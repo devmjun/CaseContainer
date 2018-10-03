@@ -91,7 +91,8 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
                 addChild(childVC)
                 v.horizonCanvasView.addSubview(childVC.view)
                 
-                if childVC is ParallaxTableViewController {
+                if childVC is ParallaxTableViewController ||
+                    childVC is ParallaxCollectionViewController {
                     let indexWidth: CGFloat = v.ui.contentsScrollViewFrameSize.width
                     let rect = CGRect(
                         x: indexWidth * CGFloat(index), y: 0,
@@ -160,7 +161,6 @@ extension CaseContainerViewController {
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         children.forEach { $0.endAppearanceTransition() }
-        
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
