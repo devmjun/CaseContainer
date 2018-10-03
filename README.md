@@ -34,7 +34,7 @@ $ brew install carthage
 add CaseContainer to your `Cartfile`: 
 
 ```ogdl
-github "devminjun/CaseContainer" ~> 0.5.1
+github "devmjun/CaseContainer" ~> 0.5.1
 ```
 
 And run `carthage update`.
