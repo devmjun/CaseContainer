@@ -37,7 +37,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
     public var tabScrollView = TabScrollView()
     
     public var contentsScrollView = UIScrollView().then {
-        $0.bounces = false
+        $0.bounces = true
         $0.backgroundColor = .white
         $0.isDirectionalLockEnabled = true
         $0.showsVerticalScrollIndicator = false
