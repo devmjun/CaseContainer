@@ -34,7 +34,7 @@ $ brew install carthage
 add CaseContainer to your `Cartfile`: 
 
 ```ogdl
-github "devminjun/CaseContainer" ~> 0.2.0
+github "devminjun/CaseContainer" ~> 0.3.0
 ```
 
 And run `carthage update`.
@@ -76,6 +76,7 @@ class YourContainerViewController: CaseContainerViewController {
             indicatorColor: .green,
             tabButtonColor: (normal: .gray, highLight: .black))
         
+        // 4
         viewContorllers = [tableViewController, someViewController]
     }
 }
