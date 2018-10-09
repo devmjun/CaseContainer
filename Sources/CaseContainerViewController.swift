@@ -60,7 +60,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
             removeAllWithout(index)
             goTo(index)
             
-            delegate?.caseContainer(
+            delegate?.caseContainer?(
                 caseContainerViewController: self,
                 didSelectTabButton: sender,
                 prevIndex: currentViewControllerIdnex,
@@ -161,6 +161,7 @@ extension CaseContainerViewController {
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         children.forEach { $0.endAppearanceTransition() }
+        
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
@@ -193,7 +194,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             preventingException = false
         }
         
-        delegate?.caseContainer(
+        delegate?.caseContainer?(
             caseContainerViewController: self,
             scrollViewWillBeginDragging: scrollView)
         
@@ -238,7 +239,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
                     case .down: break
                     }
                     
-                    delegate?.caseContainer(
+                    delegate?.caseContainer?(
                         caseContainerViewController: self,
                         progress: _percentComplete,
                         index: Int(scrollViewStatus.originIndex),
@@ -265,13 +266,13 @@ extension CaseContainerViewController: UIScrollViewDelegate {
                     }
                 }
             }
-            delegate?.caseContainer(parallaxHeader: progress)
+            delegate?.caseContainer?(parallaxHeader: progress)
             
         }
     }
     
     open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        delegate?.caseContainer(
+        delegate?.caseContainer?(
             caseContainerViewController: self,
             index: Int(scrollViewStatus.originIndex),
             scrollViewDidEndDragging: scrollView)
@@ -309,7 +310,7 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         /// prevent TabScrollView's indicator from getting out of doing before updating - 1
         preventingException = true
         
-        delegate?.caseContainer(
+        delegate?.caseContainer?(
             caseContainerViewController: self,
             index: Int(scrollViewStatus.currentIndex),
             scrollViewDidEndDecelerating: scrollView)

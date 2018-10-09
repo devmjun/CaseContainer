@@ -26,7 +26,6 @@ class DemoViewController: CaseContainerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
         delegate = self
         
         dismissButton.addTarget(
@@ -36,6 +35,10 @@ class DemoViewController: CaseContainerViewController {
         
         view.addSubview(dismissButton)
         dismissButton.bringSubviewToFront(containerScrollView)
+        if let navigationBar = navigationController?.navigationBar {
+            dismissButton.frame.origin.y += navigationBar.frame.height
+            navigationItem.title = "Navigation Bar"
+        }
         
         imageView = UIImageView(image: UIImage(named: "swiss.jpg"))
         if let imageView = imageView {
@@ -43,6 +46,8 @@ class DemoViewController: CaseContainerViewController {
             imageView.frame = CGRect(x: 0, y: 0,
                                      width: UIScreen.mainWidth, height: appearence.headerHeight)
         }
+        
+        
     }
     
     required init() {
