@@ -8,3 +8,14 @@ jobs:
   include:
     - script: xcodebuild build test -project CaseContainer.xcodeproj -scheme Example -destination "platform=iOS Simulator,name=iPhone 8,OS=12.0" -enableCodeCoverage YES 
       after_script: bash <(curl -s https://codecov.io/bash) -J 'CaseContainer'
+
+# Verify a Carthage build 
+env:
+  global:
+    - FRAMEWORK_NAME=<CaseContainer>
+before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+before_deploy:
+  - carthage build --no-skip-current
+  - carthage archive $FRAMEWORK_NAME
