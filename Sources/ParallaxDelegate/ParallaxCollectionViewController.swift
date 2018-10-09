@@ -10,8 +10,6 @@ import UIKit
 
 open class ParallaxCollectionViewController: UICollectionViewController {
     weak open var delegate: ParallaxViewDelegate?
-    
-    
     open override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll(scrollView: scrollView, tableViewAndCollectionView: collectionView)
     }
