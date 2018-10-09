@@ -42,6 +42,10 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         $0.isDirectionalLockEnabled = true
         $0.showsVerticalScrollIndicator = false
         $0.isPagingEnabled = true
+        
+        if #available(iOS 11, *) {
+            $0.contentInsetAdjustmentBehavior = .never
+        }
     }
     
     /**
@@ -61,14 +65,29 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             let tabBarController = vc.tabBarController else {
                 return 0
         }
-        let tabBarHeight = tabBarController.tabBar.frame.height
+        var tabBarHeight = tabBarController.tabBar.frame.height
         
         if #available(iOS 11.0, *) {
             let homeIndicatorHeight = homeIndicator.safeAreaInsets.bottom
+            // MARK: bug: having different Value at the same point when having UINavigationBar or not having UINavigationBar
+            // temporary expedient at not.
+            // in iPhoneX serise, UITabBarController.TabBar Height is 49 when having only UITabBarController but UITabBarController.TabBar Height is 49 + 34(home Indicator's height) when having both UITabBarController and UINavigationController.
+            // the same instance has different value at the same point. I don't know reason. now(2018.10.10)
+            // and when having UINavigationController.navigationBar, to be forced safe area constraint in the bottom
+            tabBarHeight = tabBarHeight > 50 ? (tabBarHeight - homeIndicatorHeight) : tabBarHeight
             return tabBarHeight + homeIndicatorHeight
         } else {
             return tabBarHeight
         }
+    }
+    
+    public var navigationBarHeight: CGFloat {
+        guard let navigationBar = vc.navigationController,
+            let height = vc.navigationController?.navigationBar.frame.size.height,
+            navigationBar.isNavigationBarHidden == false else {
+            return 0
+        }
+        return height
     }
     
     struct UI {
@@ -81,7 +100,8 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         init(containerViewController: CaseContainerViewController,
              headerHeight: CGFloat,
              tabScrollHeaight: CGFloat,
-             tabBarHeight: CGFloat) {
+             tabBarHeight: CGFloat,
+             naviBarHeight: CGFloat) {
             guard containerViewController.viewContorllers.count > 0  else {
                 fatalError("you must Implement ChildViewController")
             }
@@ -91,7 +111,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             
             contentsScrollViewFrameSize = CGSize(
                 width: UIScreen.mainWidth,
-                height: UIScreen.mainHeight - (UIApplication.statusBarHeight + tabScrollViewHeight + tabBarHeight))
+                height: UIScreen.mainHeight - (UIApplication.statusBarHeight + tabScrollViewHeight + tabBarHeight + naviBarHeight))
             
             contentsScrollViewContentSize = CGSize(
                 width: UIScreen.mainWidth * numberOfChildVierControlelr,
@@ -108,7 +128,8 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         containerViewController: vc,
         headerHeight: vc.appearence.headerHeight,
         tabScrollHeaight: vc.appearence.tabScrollHegiht,
-        tabBarHeight: tabBarHeight)
+        tabBarHeight: tabBarHeight,
+        naviBarHeight: navigationBarHeight)
     
     
     override func setupUI() {
@@ -131,7 +152,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         verticalCanvasView.addSubviews([headerView, tabScrollView, contentsScrollView])
         
         containerScrollView
-            .topAnchor(to: layoutMarginsGuide.topAnchor)
+            .topAnchor(to: topAnchor, constant: UIApplication.statusBarHeight + navigationBarHeight)
             .leadingAnchor(to: leadingAnchor)
             .trailingAnchor(to: trailingAnchor)
             .bottomAnchor(to: bottomAnchor, constant: -tabBarHeight)

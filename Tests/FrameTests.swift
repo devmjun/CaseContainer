@@ -13,11 +13,18 @@ class FrameTests: XCTestCase {
     
     var sut: DemoViewController!
     var statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+    let width = UIScreen.mainWidth
+    var headerHeight: CGFloat!
+    var tabScrollViewHeight: CGFloat!
+    
     override func setUp() {
         sut = DemoViewController()
         UIApplication.shared.keyWindow?.rootViewController =  sut
         _ = sut.v
         sut.v.layoutIfNeeded()
+        
+        headerHeight = sut.v.headerView.frame.height
+        tabScrollViewHeight = sut.v.tabScrollView.frame.height
         
     }
     
@@ -31,7 +38,6 @@ class FrameTests: XCTestCase {
     func test_ContainerScrollViewFrame_Is_ValidWhenInitializing() {
         // 1
         let y: CGFloat = statusBarHeight
-        let width = UIScreen.mainWidth
         let height = UIScreen.mainHeight - y
         
         // 2
@@ -43,9 +49,6 @@ class FrameTests: XCTestCase {
     
     func test_verticalCanvasFrameIsValidWhenInitializing() {
         // 1
-        let width = UIScreen.mainWidth
-        let headerHeight = sut.v.headerView.frame.height
-        let tabScrollViewHeight = sut.v.tabScrollView.frame.height
         let contentScrollViewHeight = sut.v.contentsScrollView.frame.height
         let verticalCanvasHeight = headerHeight + tabScrollViewHeight + contentScrollViewHeight
         
@@ -63,15 +66,12 @@ class FrameTests: XCTestCase {
     
     func test_ContentScrollViewFrameIsValidWhenInitializing() {
         // 1
-        let contentScrollViewFrameWidth = UIScreen.mainWidth
-        let tabScrollViewHeight = sut.v.tabScrollView.frame.height
-        let headerScrollViewHeight = sut.v.headerView.frame.height
         let contentScrollViewFrameHeight = UIScreen.mainHeight - (statusBarHeight + tabScrollViewHeight)
-        let y = statusBarHeight + headerScrollViewHeight + tabScrollViewHeight
+        let y = statusBarHeight + headerHeight + tabScrollViewHeight
         
         let rect = CGRect(
             x: 0, y: y,
-            width: contentScrollViewFrameWidth, height: contentScrollViewFrameHeight)
+            width: width, height: contentScrollViewFrameHeight)
         
         // 2
         let convertRect = sut.contentsScrollView.convert(sut.v.contentsScrollView.bounds, to: sut.v)

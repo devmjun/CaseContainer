@@ -53,5 +53,6 @@ class FrameWithTabBarTests: XCTestCase {
         let convertContentScrollViewRect = sut.v.contentsScrollView.convert(sut.v.contentsScrollView.bounds, to: sut.v)
         
         XCTAssertEqual(convertContentScrollViewRect, rect)
+        XCTAssertEqual(sut.v.contentsScrollView.contentSize, sut.v.horizonCanvasView.frame.size)
     }
 }
