@@ -23,6 +23,8 @@
 		0467BD6F2162826E0002C775 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD4F216280B00002C775 /* Then.swift */; };
 		0467BDFA2164F2300002C775 /* ChildCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BDF92164F2300002C775 /* ChildCollectionViewController.swift */; };
 		0467BDFD2164F5FF0002C775 /* ParallaxCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BDFB2164F59B0002C775 /* ParallaxCollectionViewController.swift */; };
+		046914C3216D2FA7009CE765 /* FrameWithNaviBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046914C2216D2FA7009CE765 /* FrameWithNaviBarTests.swift */; };
+		046914E3216D55FA009CE765 /* FrameWithTabBarAndNaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046914E2216D55FA009CE765 /* FrameWithTabBarAndNaviBar.swift */; };
 		04DBEE11215A279C009750F2 /* CaseContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04DBEE03215A279C009750F2 /* CaseContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04DBEE1F215A2A2B009750F2 /* CaseContainerBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE1E215A2A2B009750F2 /* CaseContainerBaseView.swift */; };
 		04DBEE21215A2A33009750F2 /* CaseContainerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBEE20215A2A33009750F2 /* CaseContainerBaseViewController.swift */; };
@@ -91,6 +93,8 @@
 		0467BD4F216280B00002C775 /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		0467BDF92164F2300002C775 /* ChildCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCollectionViewController.swift; sourceTree = "<group>"; };
 		0467BDFB2164F59B0002C775 /* ParallaxCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxCollectionViewController.swift; sourceTree = "<group>"; };
+		046914C2216D2FA7009CE765 /* FrameWithNaviBarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameWithNaviBarTests.swift; sourceTree = "<group>"; };
+		046914E2216D55FA009CE765 /* FrameWithTabBarAndNaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameWithTabBarAndNaviBar.swift; sourceTree = "<group>"; };
 		04DBEE00215A279C009750F2 /* CaseContainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaseContainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DBEE03215A279C009750F2 /* CaseContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaseContainer.h; sourceTree = "<group>"; };
 		04DBEE04215A279C009750F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 			children = (
 				040EFA1E215BCA670082E029 /* FrameTests.swift */,
 				040EFA27215BCAA60082E029 /* FrameWithTabBarTests.swift */,
+				046914C2216D2FA7009CE765 /* FrameWithNaviBarTests.swift */,
+				046914E2216D55FA009CE765 /* FrameWithTabBarAndNaviBar.swift */,
 				040EFA29215BCAB10082E029 /* LifeCycleTests.swift */,
 				040EFA20215BCA670082E029 /* Info.plist */,
 			);
@@ -410,7 +416,9 @@
 			files = (
 				040EFA28215BCAA60082E029 /* FrameWithTabBarTests.swift in Sources */,
 				040EFA1F215BCA670082E029 /* FrameTests.swift in Sources */,
+				046914E3216D55FA009CE765 /* FrameWithTabBarAndNaviBar.swift in Sources */,
 				040EFA2A215BCAB10082E029 /* LifeCycleTests.swift in Sources */,
+				046914C3216D2FA7009CE765 /* FrameWithNaviBarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,10 +691,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = E8CS7J8RX4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
