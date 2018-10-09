@@ -12,6 +12,8 @@ class StartViewController: UITableViewController {
     enum Titles: String, CaseIterable {
         case fullScreen
         case withTabBarController
+        case withNavigationController
+        case both
     }
     
     override func viewDidLoad() {
@@ -44,16 +46,28 @@ class StartViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let string = tableView.cellForRow(at: indexPath)?.textLabel?.text,
             let selectedTitle = Titles(rawValue: string) {
+            let demoViewController = DemoViewController()
             switch selectedTitle {
             case .fullScreen:
-                let viewController = DemoViewController()
-                show(viewController, sender: nil)
+                show(demoViewController, sender: nil)
+                
             case .withTabBarController:
                 let tabBarViewController = UITabBarController()
-                let childVC = DemoViewController()
-                childVC.title = "TabBar"
-                tabBarViewController.viewControllers = [childVC]
+                demoViewController.title = "TabBar"
+                tabBarViewController.viewControllers = [demoViewController]
+                show(tabBarViewController, sender: nil)
                 
+            case .withNavigationController:
+                let naviViewController = UINavigationController(rootViewController: demoViewController)
+                naviViewController.navigationBar.isHidden = false
+                show(naviViewController, sender: nil)
+                
+            case.both :
+                let tabBarViewController = UITabBarController()
+                let childVC = UINavigationController(rootViewController: demoViewController)
+                childVC.navigationBar.isHidden = false
+                childVC.tabBarItem.title = "TabBar"
+                tabBarViewController.viewControllers = [childVC]
                 show(tabBarViewController, sender: nil)
             }
         }
