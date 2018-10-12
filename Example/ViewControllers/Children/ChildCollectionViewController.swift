@@ -9,7 +9,7 @@
 import UIKit
 import CaseContainer
 
-class ChildCollectionViewContorller: ParallaxCollectionViewController {
+final class ChildCollectionViewContorller: ParallaxCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
