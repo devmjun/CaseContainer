@@ -9,12 +9,15 @@
 import UIKit
 import CaseContainer
 
-class ChildTableViewController: ParallaxTableViewController {
+final class ChildTableViewController: ParallaxTableViewController {
+    var mock = MockInformation()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.register(ChildTableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -22,14 +25,9 @@ class ChildTableViewController: ParallaxTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return mock.information.count
+        
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("ChildViewController viewWillAppear!\(self)")
@@ -50,8 +48,10 @@ class ChildTableViewController: ParallaxTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = "\(indexPath) + \(self.title!)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ChildTableViewCell 
+        
+        let item = mock.information[indexPath.row]
+        cell.configure(image: item.image, name: item.name, explanation: item.explanation)
         return cell
     }
     

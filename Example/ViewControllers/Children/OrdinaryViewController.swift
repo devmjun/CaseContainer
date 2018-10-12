@@ -8,7 +8,7 @@
 
 import UIKit
 import CaseContainer
-class OrdinaryViewController: UIViewController {
+final class OrdinaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

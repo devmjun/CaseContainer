@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StartViewController: UITableViewController {
+final class StartViewController: UITableViewController {
     enum Titles: String, CaseIterable {
         case fullScreen
         case withTabBarController
