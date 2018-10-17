@@ -60,7 +60,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         $0.backgroundColor = .white
     }
     
-    public var tabBarHeight: CGFloat {
+    private var tabBarHeight: CGFloat {
         guard let homeIndicator = UIApplication.shared.windows.first,
             let tabBarController = vc.tabBarController else {
                 return 0
@@ -81,16 +81,17 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         }
     }
     
-    public var navigationBarHeight: CGFloat {
-        guard let navigationBar = vc.navigationController,
+    private var navigationBarHeight: CGFloat {
+        guard let navigationController = vc.navigationController,
             let height = vc.navigationController?.navigationBar.frame.size.height,
-            navigationBar.isNavigationBarHidden == false else {
-            return 0
+            navigationController.isNavigationBarHidden == false ||
+                navigationController.navigationBar.isHidden == false else {
+                    return 0
         }
         return height
     }
     
-    struct UI {
+    public struct UI {
         var headerViewHeight: CGFloat
         var tabScrollViewHeight: CGFloat
         var contentsScrollViewFrameSize: CGSize
@@ -124,7 +125,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         }
     }
     
-    lazy var ui = UI(
+    public private(set) lazy var ui = UI(
         containerViewController: vc,
         headerHeight: vc.appearence.headerHeight,
         tabScrollHeaight: vc.appearence.tabScrollHegiht,
@@ -227,7 +228,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             initialChildVC is ParallaxCollectionViewController {
             initialChildVC.view.frame = CGRect(x: 0, y: 0, width: ui.contentsScrollViewFrameSize.width, height: ui.contentsScrollViewContentSize.height)
         }else {
-        // if it is not ParallaxTableViewController
+            // if it is not ParallaxTableViewController
             let vaildViewHeight = UIScreen.mainHeight - UIApplication.statusBarHeight
             let scaleRatio = ui.contentsScrollViewContentSize.height / vaildViewHeight
             initialChildVC.view.transform = CGAffineTransform(scaleX: 1.0, y: scaleRatio)
