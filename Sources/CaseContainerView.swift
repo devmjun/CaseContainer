@@ -69,7 +69,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         
         if #available(iOS 11.0, *) {
             let homeIndicatorHeight = homeIndicator.safeAreaInsets.bottom
-            // MARK: bug: having different Value at the same point when having UINavigationBar or not having UINavigationBar
+            // MARK: issues: having different Value at the same point when having UINavigationBar or not having UINavigationBar
             // temporary expedient at not.
             // in iPhoneX serise, UITabBarController.TabBar Height is 49 when having only UITabBarController but UITabBarController.TabBar Height is 49 + 34(home Indicator's height) when having both UITabBarController and UINavigationController.
             // the same instance has different value at the same point. I don't know reason. now(2018.10.10)
