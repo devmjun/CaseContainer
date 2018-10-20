@@ -103,11 +103,16 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
              tabScrollHeaight: CGFloat,
              tabBarHeight: CGFloat,
              naviBarHeight: CGFloat) {
-            guard containerViewController.viewContorllers.count > 0  else {
+            guard containerViewController.viewContorllers.count > 0 else {
                 #if targetEnvironment(simulator)
                 fatalError("you must Implement ChildViewController")
                 #else
-                return
+                headerViewHeight = 0
+                tabScrollViewHeight = 0
+                contentsScrollViewFrameSize = CGSize.zero
+                contentsScrollViewContentSize = CGSize.zero
+                containerScrollViewContentSize = CGSize.zero
+                return 
                 #endif
             }
             let numberOfChildVierControlelr: CGFloat = CGFloat(containerViewController.viewContorllers.count)
