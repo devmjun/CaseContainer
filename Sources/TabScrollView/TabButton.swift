@@ -7,7 +7,7 @@
 //
 
 open class TabButton: UIButton {
-    enum Status {
+    enum TurnType {
         case off, on
         /**
          this method turn On/Off high Light status
@@ -20,7 +20,7 @@ open class TabButton: UIButton {
         }
     }
     
-    var status: Status = .off {
+    var turnType: TurnType = .off {
         willSet {
             titleLabel?.font = newValue == .on ? UIFont.boldSystemFont(ofSize: 17) : UIFont.systemFont(ofSize: 16)
             setTitleColor(newValue == .on ? highLightedColor ?? .black : normalColor ?? .gray, for: .normal)
