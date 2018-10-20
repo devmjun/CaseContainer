@@ -131,7 +131,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
     }
     
     open func buttonHighlight(_ index: Int) {
-        v.tabScrollView.buttons[index].status = .on
+        v.tabScrollView.buttons[index].turnType = .on
     }
     /**
      this method dehighlight All of the highlighted buttons with excepting of a button at `index`
@@ -143,7 +143,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
                 guard let strongSelf = self else { return }
                 let currentIndex = Int(strongSelf.scrollViewStatus.currentIndex)
                 if currentIndex != offset {
-                    btn.status = .off
+                    btn.turnType = .off
                 }
         }
     }

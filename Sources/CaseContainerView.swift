@@ -104,7 +104,11 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
              tabBarHeight: CGFloat,
              naviBarHeight: CGFloat) {
             guard containerViewController.viewContorllers.count > 0  else {
+                #if targetEnvironment(simulator)
                 fatalError("you must Implement ChildViewController")
+                #else
+                return
+                #endif
             }
             let numberOfChildVierControlelr: CGFloat = CGFloat(containerViewController.viewContorllers.count)
             headerViewHeight = headerHeight
@@ -190,12 +194,20 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         
         /// ViewControllers that are added on initilization add parent ViewController's childViewController
         guard vc.viewContorllers.count > 0 else {
+            #if targetEnvironment(simulator)
             fatalError("You must be to add container view controller's child view controller when it is initializaed")
+            #else
+            return
+            #endif
         }
         
         vc.viewContorllers.forEach {
             guard $0.title != nil else {
+                #if targetEnvironment(simulator)
                 fatalError("You must be to add viewControllers`s title when it is initialized")
+                #else
+                return
+                #endif 
             }
         }
         
