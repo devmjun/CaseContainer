@@ -97,12 +97,12 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
                     let rect = CGRect(
                         x: indexWidth * CGFloat(index), y: 0,
                         width: indexWidth, height: v.ui.contentsScrollViewContentSize.height)
-                    childVC.view.frame = rect
+                    childVC.view.layer.frame = rect
                 }else {
                     let vaildViewHeight = UIScreen.mainHeight - UIApplication.statusBarHeight
                     let scaleRatio = v.ui.contentsScrollViewContentSize.height / vaildViewHeight
                     childVC.view.transform = CGAffineTransform(scaleX: 1.0, y: scaleRatio)
-                    childVC.view.frame.origin = CGPoint(x: v.ui.contentsScrollViewFrameSize.width * CGFloat(index), y: 0)
+                    childVC.view.layer.frame.origin = CGPoint(x: v.ui.contentsScrollViewFrameSize.width * CGFloat(index), y: 0)
                 }
                 
                 childVC.didMove(toParent: self)
@@ -156,12 +156,10 @@ extension CaseContainerViewController {
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         children.forEach { $0.beginAppearanceTransition(true, animated: true) }
-        
     }
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         children.forEach { $0.endAppearanceTransition() }
-        
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
@@ -197,7 +195,6 @@ extension CaseContainerViewController: UIScrollViewDelegate {
         delegate?.caseContainer?(
             caseContainerViewController: self,
             scrollViewWillBeginDragging: scrollView)
-        
     }
     
     /* scrolling left and right are synchronized  */

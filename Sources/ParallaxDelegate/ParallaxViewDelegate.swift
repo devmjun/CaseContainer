@@ -21,24 +21,23 @@ extension CaseContainerViewController: ParallaxViewDelegate {
         let maxiumParallaxY = headerView.frame.height
         
         switch direction {
-        case .left: fallthrough
-        case .right: fallthrough
+        case .left: break
+        case .right: break
         case .up:
             if scrollView == tableViewAndCollectionView {
                 if v.containerScrollView.contentOffset.y < maxiumParallaxY && !childScrollingDownDueToParent {
                     let offsetY = max(min(v.containerScrollView.contentOffset.y + tableViewAndCollectionView.contentOffset.y, maxiumParallaxY), 0)
-                    v.containerScrollView.contentOffset.y = offsetY
-                    tableViewAndCollectionView.contentOffset.y = 0
-                    v.headerView.frame.origin.y = offsetY * 0.5
+                    v.containerScrollView.setContentOffset(y: offsetY)
+                    tableViewAndCollectionView.setContentOffset(y: 0)
+                    v.headerView.layer.frame.origin.y = offsetY * 0.5
                 }
             }
-            
         case .down:
             if scrollView == tableViewAndCollectionView {
                 if tableViewAndCollectionView.contentOffset.y < 0 && v.containerScrollView.contentOffset.y > 0 {
                     let offsetY = max(v.containerScrollView.contentOffset.y - abs(tableViewAndCollectionView.contentOffset.y), 0)
-                    v.containerScrollView.contentOffset.y = offsetY
-                    v.headerView.frame.origin.y = offsetY * 0.5
+                    v.containerScrollView.setContentOffset(y: offsetY)
+                    v.headerView.layer.frame.origin.y = offsetY * 0.5
                 }
             }
             
@@ -46,10 +45,10 @@ extension CaseContainerViewController: ParallaxViewDelegate {
                 if tableViewAndCollectionView.contentOffset.y > 0 && v.containerScrollView.contentOffset.y < maxiumParallaxY {
                     childScrollingDownDueToParent = true
                     let offsetY = max(tableViewAndCollectionView.contentOffset.y - (maxiumParallaxY - v.containerScrollView.contentOffset.y), 0)
-                    tableViewAndCollectionView.contentOffset.y = offsetY
-                    v.contentsScrollView.contentOffset.y = maxiumParallaxY
+                    tableViewAndCollectionView.setContentOffset(y: offsetY)
+                    v.contentsScrollView.setContentOffset(y: maxiumParallaxY)
                     childScrollingDownDueToParent = false
-                    v.headerView.frame.origin.y = offsetY * 0.5
+                    v.headerView.layer.frame.origin.y = offsetY * 0.5
                 }
             }
         }
