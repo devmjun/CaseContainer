@@ -18,6 +18,7 @@
 		040EFA28215BCAA60082E029 /* FrameWithTabBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EFA27215BCAA60082E029 /* FrameWithTabBarTests.swift */; };
 		040EFA2A215BCAB10082E029 /* LifeCycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EFA29215BCAB10082E029 /* LifeCycleTests.swift */; };
 		04321DA7215F3B5100565864 /* OrdinaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04321DA6215F3B5100565864 /* OrdinaryViewController.swift */; };
+		043B465A2180F34700EA8EFC /* ScrollView+ContentOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B46592180F34700EA8EFC /* ScrollView+ContentOffset.swift */; };
 		0467BD2C2161F2310002C775 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD2B2161F2310002C775 /* StartViewController.swift */; };
 		0467BD6F2162826E0002C775 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BD4F216280B00002C775 /* Then.swift */; };
 		0467BDFA2164F2300002C775 /* ChildCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467BDF92164F2300002C775 /* ChildCollectionViewController.swift */; };
@@ -89,6 +90,7 @@
 		040EFA27215BCAA60082E029 /* FrameWithTabBarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameWithTabBarTests.swift; sourceTree = "<group>"; };
 		040EFA29215BCAB10082E029 /* LifeCycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCycleTests.swift; sourceTree = "<group>"; };
 		04321DA6215F3B5100565864 /* OrdinaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdinaryViewController.swift; sourceTree = "<group>"; };
+		043B46592180F34700EA8EFC /* ScrollView+ContentOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+ContentOffset.swift"; sourceTree = "<group>"; };
 		0467BD2B2161F2310002C775 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		0467BD4F216280B00002C775 /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		0467BDF92164F2300002C775 /* ChildCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCollectionViewController.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				04DBEE36215A2C47009750F2 /* UIScreen+bounds.swift */,
 				04DBEE38215A2C51009750F2 /* UIapplication+StatusBar.swift */,
 				04DBEE3A215A2C57009750F2 /* Array+index.swift */,
+				043B46592180F34700EA8EFC /* ScrollView+ContentOffset.swift */,
 				0467BD4F216280B00002C775 /* Then.swift */,
 			);
 			path = Utilities;
@@ -462,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043B465A2180F34700EA8EFC /* ScrollView+ContentOffset.swift in Sources */,
 				0467BDFD2164F5FF0002C775 /* ParallaxCollectionViewController.swift in Sources */,
 				0467BD6F2162826E0002C775 /* Then.swift in Sources */,
 				04DBEE3B215A2C57009750F2 /* Array+index.swift in Sources */,
