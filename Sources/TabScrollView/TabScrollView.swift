@@ -20,8 +20,6 @@ open class TabScrollView: UIScrollView {
     var indicator: UIView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-
-    
     
     public var buttonsRect = Array<CGRect>()
     open private(set) var buttons = Array<TabButton>()
@@ -79,7 +77,6 @@ open class TabScrollView: UIScrollView {
         setupIndicator(
             firstSize: CGSize(width: buttonsWidth[0],
                               height: ui.tabScrollViewHeight))
-        
         setupButtons(parent: vc)
     }
     
@@ -89,7 +86,7 @@ open class TabScrollView: UIScrollView {
         let y = firstSize.height - indicatorHeight
         let width = firstSize.width
         let rect = CGRect(x: 0, y: y, width: width, height: indicatorHeight)
-        indicator.frame = rect
+        indicator.layer.frame = rect
     }
     
     // 4
@@ -110,7 +107,6 @@ open class TabScrollView: UIScrollView {
             _horizontalCanvas.addSubview(btn)
             buttons.append(btn)
         }
-        
         indicator.backgroundColor = indicatorColor
     }
     
@@ -122,7 +118,7 @@ open class TabScrollView: UIScrollView {
         
         indicator.layer.frame.origin.x = buttonRect.minX
         indicator.layer.frame.size.width = buttonRect.width
-        contentOffset.x = state == .largeThenScreen ? convertOffsetX : 0
+        setContentOffset(x: state == .largeThenScreen ? convertOffsetX : 0)
     }
     
     /**
@@ -143,7 +139,7 @@ open class TabScrollView: UIScrollView {
         let convertOffsetX = (convertOriginX / 2 >= limitingValue) ? limitingValue : convertOriginX / 2
         
         indicator.layer.frame.origin.x = convertOriginX
-        contentOffset.x = state == .largeThenScreen ? convertOffsetX : 0
+        setContentOffset(x: state == .largeThenScreen ? convertOffsetX : 0)
         
         let prevButtonWidth = buttonsRect[index].width
         let currentButtonWidth = buttonsRect[index+1].width
@@ -185,7 +181,7 @@ open class TabScrollView: UIScrollView {
         let convertOffsetX = (convertOriginX / 2 >= limitingValue) ? limitingValue : convertOriginX / 2
         
         indicator.layer.frame.origin.x = convertOriginX
-        contentOffset.x = state == .largeThenScreen ? convertOffsetX : 0
+        setContentOffset(x: state == .largeThenScreen ? convertOffsetX : 0)
         
         // Synchronize indicator's width
         let nextButtonWidth = buttonsRect[index].width

@@ -26,7 +26,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
     /**
      This property is containerScrollView's contentView
      */
-    lazy public private(set) var verticalCanvasView = UIView().then {
+    public private(set) var verticalCanvasView = UIView().then {
         $0.backgroundColor = .white
     }
     
@@ -249,7 +249,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             let vaildViewHeight = UIScreen.mainHeight - UIApplication.statusBarHeight
             let scaleRatio = ui.contentsScrollViewContentSize.height / vaildViewHeight
             initialChildVC.view.transform = CGAffineTransform(scaleX: 1.0, y: scaleRatio)
-            initialChildVC.view.frame.origin = CGPoint.zero
+            initialChildVC.view.layer.frame.origin = CGPoint.zero
         }
         initialChildVC.didMove(toParent: vc)
     }
