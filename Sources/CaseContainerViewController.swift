@@ -118,8 +118,8 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
     open func removeAllWithout(_ index: Int?) {
         children
             .forEach { [weak self] (childVC: UIViewController) in
-                guard let strongSelf = self else { return }
-                let activeChildVC = strongSelf.viewContorllers.at(index)
+                guard let self = self else { return }
+                let activeChildVC = self.viewContorllers.at(index)
                 if childVC != activeChildVC {
                     childVC.willMove(toParent: nil)
                     childVC.view.removeFromSuperview()
@@ -140,8 +140,8 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
         v.tabScrollView.buttons
             .enumerated()
             .forEach { [weak self] (offset: Int, btn: TabButton) in
-                guard let strongSelf = self else { return }
-                let currentIndex = Int(strongSelf.scrollViewStatus.currentIndex)
+                guard let self = self else { return }
+                let currentIndex = Int(self.scrollViewStatus.currentIndex)
                 if currentIndex != offset {
                     btn.turnType = .off
                 }
