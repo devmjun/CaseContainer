@@ -15,12 +15,13 @@ public protocol CaseContainerBaseViewType {
     init(controllBy viewController: ViewController)
 }
 
-open class CaseContainerBaseView<ViewController: CaseContainerBaseViewContollerType>: UIView, CaseContainerBaseViewType {
+open class CaseContainerBaseView<ViewController: CaseContainerBaseViewContollerType>: UIView, CaseContainerBaseViewType, PreservationType {
     weak public var vc: ViewController!
     
     required public init(controllBy viewController: ViewController) {
         vc = viewController
         super.init(frame: UIScreen.main.bounds)
+        restorationIdentifier = unUniqueIdentifier
         setupUI()
         setupBinding()
     }

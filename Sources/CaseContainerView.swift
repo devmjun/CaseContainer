@@ -228,6 +228,7 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
         tabScrollView.delegate = vc
         
         tabScrollView.setupBinding(parent: vc, ui: ui)
+        assigningResotrationIDToChildVC()
     }
     
     func setupChildViewController(of childViewControllers: [UIViewController]) {
@@ -252,6 +253,12 @@ open class CaseContainerView: CaseContainerBaseView<CaseContainerViewController>
             initialChildVC.view.layer.frame.origin = CGPoint.zero
         }
         initialChildVC.didMove(toParent: vc)
+    }
+    
+    private func assigningResotrationIDToChildVC() {
+        vc.viewContorllers.forEach {
+            $0.restorationIdentifier = UUID().uuidString
+        }
     }
 }
 

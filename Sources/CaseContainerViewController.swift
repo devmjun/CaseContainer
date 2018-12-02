@@ -74,6 +74,10 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
         }
     }
     
+    var currentIndex: Int {
+        return Int(scrollViewStatus.currentIndex)
+    }
+    
     /// synchronizeing ScrollView and Child ViewControlelr
     open func prevIndex(n: Int?) -> Int? { return n! - 1 }
     open func nextIndex(n: Int?) -> Int? { return n! + 1 }
@@ -313,8 +317,3 @@ extension CaseContainerViewController: UIScrollViewDelegate {
             scrollViewDidEndDecelerating: scrollView)
     }
 }
-
-
-
-
-

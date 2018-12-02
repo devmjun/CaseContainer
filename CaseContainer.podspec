@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "CaseContainer"
-  s.version               = "0.9.1"
+  s.version               = "0.9.2"
   s.summary               = "Container view controller with Parallax TableView"
 
   s.homepage              = "https://github.com/devmjun/CaseContainer"
