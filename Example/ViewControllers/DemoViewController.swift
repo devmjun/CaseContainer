@@ -64,7 +64,6 @@ class DemoViewController: CaseContainerViewController {
             headerViewHegiht: 300, tabScrollViewHeight: 50,
             indicatorColor: .darkGray,
             tabButtonColor: (normal: .gray, highLight: .black))
-        
     }
     
     override func viewDidLoad() {
@@ -202,4 +201,3 @@ extension DemoViewController: CaseContainerDelegate {
         imageView.alpha = 1 - progress
     }
 }
-

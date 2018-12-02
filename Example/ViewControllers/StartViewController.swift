@@ -15,7 +15,6 @@ final class StartViewController: UITableViewController {
         case withNavigationController
         case both
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

@@ -14,7 +14,7 @@ public protocol CaseContainerBaseViewContollerType: class {
     init()
 }
 
-open class CaseContainerBaseViewController: UIViewController, CaseContainerBaseViewContollerType  {
+open class CaseContainerBaseViewController: UIViewController, CaseContainerBaseViewContollerType, PreservationType  {
     
     public var viewContorllers: [UIViewController]
     public var appearence: Appearance
@@ -23,6 +23,7 @@ open class CaseContainerBaseViewController: UIViewController, CaseContainerBaseV
         self.viewContorllers = maintain
         self.appearence = appearence
         super.init(nibName: nil, bundle: nil)
+        restorationIdentifier = unUniqueIdentifier
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -37,6 +38,7 @@ open class CaseContainerBaseViewController: UIViewController, CaseContainerBaseV
             indicatorColor: .green,
             tabButtonColor: (normal: .gray, highLight: .black))
         super.init(nibName: nil, bundle: nil)
+        restorationIdentifier = unUniqueIdentifier
     }
 }
 
