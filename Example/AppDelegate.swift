@@ -13,10 +13,14 @@ import CaseContainer
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController =  StartViewController()
-        window?.makeKeyAndVisible()
+        guard let mainWindow = window else {
+            fatalError()
+        }
+        mainWindow.rootViewController = StartViewController(style: .plain)
+        mainWindow.makeKeyAndVisible()
+        
         return true
     }
 }
