@@ -17,8 +17,8 @@ public enum Direction {
 
 open class CaseContainerViewController: CaseContainerBaseViewController {
     
-    lazy open private(set) var v = CaseContainerView(controllBy: self)
-    weak open var delegate: CaseContainerDelegate?
+    open lazy private(set) var v = CaseContainerView(controllBy: self)
+    open weak var delegate: CaseContainerDelegate?
     
     open weak var headerView: UIView! { return v.headerView }
     open weak var tabScrollView: TabScrollView! { return v.tabScrollView }
@@ -42,7 +42,7 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
     }
     
     /// didSelect TabButton
-    @objc func tabButtonAction(_ sender: TabButton) {
+    @objc open func tabButtonAction(_ sender: TabButton) {
         let index = sender.tag
         if let currentVC = children.first,
             let currentViewControllerIdnex = viewControllerIndex(currentVC),
@@ -68,19 +68,19 @@ open class CaseContainerViewController: CaseContainerBaseViewController {
         }
     }
     
-    var preventingException: Bool = false {
+    private var preventingException: Bool = false {
         willSet {
             contentsScrollView.isUserInteractionEnabled = newValue
         }
     }
     
-    var currentIndex: Int {
+    open var currentIndex: Int {
         return Int(scrollViewStatus.currentIndex)
     }
     
     /// synchronizeing ScrollView and Child ViewControlelr
-    open func prevIndex(n: Int?) -> Int? { return n! - 1 }
-    open func nextIndex(n: Int?) -> Int? { return n! + 1 }
+    func prevIndex(n: Int?) -> Int? { return n! - 1 }
+    func nextIndex(n: Int?) -> Int? { return n! + 1 }
     
     func viewControllerIndex(_ viewController: UIViewController) -> Int? {
         return viewContorllers.index(of: viewController)
